@@ -30,4 +30,4 @@ else(DOXYGEN_FOUND)
     message("Doxygen needs to be installed to generate the documentation.")
 endif(DOXYGEN_FOUND)
 
-add_executable(proj2 main.cpp)
+add_executable(proj2 main.cpp src/Airport.cpp)
