@@ -6,6 +6,7 @@
 #define PROJ2_AIRPORT_H
 
 #include <string>
+
 using namespace std;
 
 /**
@@ -30,7 +31,7 @@ public:
      * @param latitude The latitude coordinate for the airport
      * @param longitude The longitude coordinate for the airport
      */
-    Airport(string code, string name, string city, string country, float latitude, float longitude);
+    Airport(string c, string n, string ct, string cy, float lat, float lon);
 
     /**
      * Returns the IATA code for the airport
