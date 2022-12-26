@@ -4,8 +4,10 @@
 
 #include "Airport.h"
 
+#include <utility>
+
 Airport::Airport(string c, string n, string ct, string cy, float lat, float lon):
-    code(c), name(n), city(ct), country(cy), latitude(lat), longitude(lon) {};
+    code(move(c)), name(move(n)), city(move(ct)), country(move(cy)), latitude(lat), longitude(lon) {};
 
 string Airport::getCode() const {
     return this->code;

@@ -16,7 +16,7 @@ class FileReader {
 public:
     unordered_map<string, Airline> readAirlinesFile();
     unordered_map<string, Airport> readAirportFile();
-    readFlightsFile();
+    void readFlightsFile();
 
 };
 
