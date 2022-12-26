@@ -1,6 +1,8 @@
 #include <iostream>
+#include "src/FileReader.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    FileReader reader = FileReader();
+    unordered_map<string, Airline> airlines = reader.readAirlinesFile("CSV/airlines.csv");
+
 }

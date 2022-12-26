@@ -14,9 +14,9 @@ using namespace std;
 
 class FileReader {
 public:
-    unordered_map<string, Airline> readAirlinesFile();
-    unordered_map<string, Airport> readAirportFile();
-    void readFlightsFile();
+    unordered_map<string, Airline> readAirlinesFile(string fname);
+    unordered_map<string, Airport> readAirportFile(string fname);
+    void readFlightsFile(string fname);
 
 };
 
