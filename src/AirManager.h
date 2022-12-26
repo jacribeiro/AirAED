@@ -6,7 +6,10 @@
 #define PROJ2_AIRMANAGER_H
 
 
+#include "AirGraph.h"
+
 class AirManager {
+    AirGraph graph;
 
 };
 
