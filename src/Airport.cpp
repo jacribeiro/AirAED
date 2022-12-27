@@ -3,8 +3,9 @@
 //
 
 #include "Airport.h"
-
 #include <utility>
+
+using namespace std;
 
 Airport::Airport(string c, string n, string ct, string cy, float lat, float lon):
     code(move(c)), name(move(n)), city(move(ct)), country(move(cy)), latitude(lat), longitude(lon) {};
