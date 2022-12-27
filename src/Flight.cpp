@@ -4,16 +4,12 @@
 
 #include "Flight.h"
 
-Flight::Flight(string o, string d, string a): origin(o), destination(d), airline(a) {};
+Flight::Flight(Airport* airport, Airline* company): destination(airport), airline(company) {};
 
-string Flight::getOrigin() const {
-    return this->origin;
+Airport Flight::getDestination() const {
+    return *this->destination;
 }
 
-string Flight::getDestination() const {
-    return this->destination;
-}
-
-string Flight::getAirline() const {
-    return this->airline;
+Airline Flight::getAirline() const {
+    return *this->airline;
 }

@@ -33,3 +33,19 @@ float Airport::getLatitude() const {
 float Airport::getLongitude() const {
     return this->longitude;
 }
+
+void Airport::visit() {
+    this->visited = true;
+}
+
+void Airport::unvisit() {
+    this->visited = false;
+}
+
+bool Airport::getvisited() {
+    return this->visited;
+}
+
+vector<Flight> Airport::getFlights() {
+    return this->flights;
+}
