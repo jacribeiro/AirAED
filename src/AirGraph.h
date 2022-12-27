@@ -6,10 +6,16 @@
 #define PROJ2_AIRGRAPH_H
 
 
+#include <vector>
 #include "Airport.h"
 #include "Flight.h"
 
+using namespace std;
+
 class AirGraph {
+
+    vector<Airport> airports;
+
     // adding a new 'node' to the graph
     void addAirport(Airport airport);
 

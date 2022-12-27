@@ -5,7 +5,9 @@
 #ifndef PROJ2_AIRPORT_H
 #define PROJ2_AIRPORT_H
 
+#include "Flight.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -20,6 +22,9 @@ class Airport {
     string country;
     float latitude;
     float longitude;
+
+    vector<Flight> flights;
+    bool visited;
 
 public:
     /**
