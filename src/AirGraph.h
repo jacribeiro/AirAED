@@ -15,6 +15,7 @@ using namespace std;
 class AirGraph {
 
     vector<Airport> airports;
+    size_t n = airports.size();
 
     // adding a new 'node' to the graph
     void addAirport(Airport airport);
@@ -22,6 +23,8 @@ class AirGraph {
     //adding a new 'edge' to the graph
     void addFlight(Flight flight);
 
+
+    void bfs()
 };
 
 
