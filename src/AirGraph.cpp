@@ -5,20 +5,25 @@
 #include <queue>
 #include "AirGraph.h"
 
-void AirGraph::bfs(Airport *airport) {
+void AirGraph::bfs(Airport airport) {
     for (auto a : airports){
         a.unvisit();
     }
     queue<Airport> q;
-    q.push(*airport);
-    airport->visit();
+    q.push(airport);
+    airport.visit();
+    airport.setDistance(0);
 
     while(!q.empty()){
         auto u = q.front();
         q.pop();
         for(auto f : u.getFlights()){
-            auto *a = f.getDestination();
-            if(!a.)
+            Airport a = f.getDestination();
+            if(!a.getvisited()){
+                q.push(a);
+                a.visit();
+                a.setDistance(airport.getDistance() + 1);
+            }
         }
     }
 }

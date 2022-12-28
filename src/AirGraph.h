@@ -24,7 +24,7 @@ class AirGraph {
     void addFlight(Flight flight);
 
 
-    void bfs(Airport *airport);
+    void bfs(Airport airport);
 };
 
 

@@ -49,3 +49,11 @@ bool Airport::getvisited() {
 vector<Flight> Airport::getFlights() {
     return this->flights;
 }
+
+int Airport::getDistance() {
+    return this->distance;
+}
+
+void Airport::setDistance(int d) {
+    this->distance = d;
+}

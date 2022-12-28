@@ -25,6 +25,7 @@ class Airport {
 
     vector<Flight> flights;
     bool visited;
+    int distance;
 
 public:
     /**
@@ -82,6 +83,10 @@ public:
     bool getvisited();
 
     vector<Flight> getFlights();
+
+    int getDistance();
+
+    void setDistance(int d);
 };
 
 
