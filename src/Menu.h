@@ -42,6 +42,12 @@ public:
      * @param airport string representing the nome of a country
      */
     void showCountryInformation(AirManager &manager, string country);
+    /**
+     * Prints all the available flight related information about an Airline
+     * @param manager Reference to a AirManager object that will perform the operation
+     * @param airline string representing the nome of an airline
+     */
+    void showAirlineInformation(AirManager &manager, string airline);
 };
 
 

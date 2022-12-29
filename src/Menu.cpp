@@ -22,7 +22,8 @@ void Menu::show() {
         cout << "1. Check the Best Flight Available.\n";
         cout << "2. Check Airport Information.\n";
         cout << "3. Check Country Information.\n";
-        cout << "4. Quit.\n";
+        cout << "4. Check Airline Information.\n";
+        cout << "5. Quit.\n";
         int n1;
         cin >> n1;
         string name1;
@@ -88,7 +89,14 @@ void Menu::show() {
 
                 showCountryInformation(manager, name1);
             }
-            case 4: {
+            case 4:{
+                cout << "***We will need you to provide the Following Information:***\n\n";
+                cout << "***Insert the name of the Country***\n";
+                cin >> name1;
+
+                showAirlineInformation(manager, name1);
+            }
+            case 5: {
                 flag = false;
                 cout << "***You have successfully exited your Air Manager!***";
                 break;
@@ -105,6 +113,10 @@ void Menu::showBestRoute(AirManager &manager, std::string departure, std::string
 }
 
 void Menu::showCountryInformation(AirManager &manager, string country) {
+
+}
+
+void Menu::showAirlineInformation(AirManager &manager, string airline) {
 
 }
 
