@@ -25,6 +25,7 @@ class Airport {
 
     vector<Flight> flights;
     bool visited;
+    int distance;
 
 public:
     /**
@@ -73,6 +74,19 @@ public:
      * @return the longitude coordinate for the airport
      */
     float getLongitude() const;
+
+
+    void visit();
+
+    void unvisit();
+
+    bool getvisited();
+
+    vector<Flight> getFlights();
+
+    int getDistance();
+
+    void setDistance(int d);
 };
 
 

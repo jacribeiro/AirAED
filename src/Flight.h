@@ -6,41 +6,35 @@
 #define PROJ2_FLIGHT_H
 
 #include <string>
+#include "Airline.h"
+#include "Airport.h"
 
 using namespace std;
 
 class Flight {
 
-    string origin;
-    string destination;
-    string airline;
+    Airport destination;
+    Airline airline;
 
 public:
     /**
      * Creates a new Flight object
-     * @param origin The IATA code for the origin airport
-     * @param destination The IATA code for the destination airport
-     * @param company The ICAO code for the airline responsible for the flight
+     * @param destination The destination airport
+     * @param company The airline responsible for the flight
      */
-    Flight(string o, string d, string a);
+    Flight(Airport airport, Airline company);
 
     /**
-     * Returns the IATA code for the origin airport
-     * @return The IATA code for the origin airport
+     * Returns the destination airport
+     * @return the destination airport
      */
-    string getOrigin() const;
+    Airport getDestination() const;
 
     /**
-     * Returns the IATA code for the destination airport
-     * @return the IATA code for the destination airport
+     * Returns the airline responsible for the flight
+     * @return the airline responsible for the flight
      */
-    string getDestination() const;
-
-    /**
-     * Returns the ICAO code for the airline responsible for the flight
-     * @return the ICAO code for the airline responsible for the flight
-     */
-    string getAirline() const;
+    Airline getAirline() const;
 };
 
 
