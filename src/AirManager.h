@@ -6,10 +6,16 @@
 #define PROJ2_AIRMANAGER_H
 
 
-#include "AirGraph.h"
+#include <unordered_map>
+#include "Airport.h"
 
 class AirManager {
-    AirGraph graph;
+    unordered_map<string, Airport> airports;
+
+public:
+    void addAirport(Airport airport);
+    void addFlight(Flight flight);
+    void bfs(Airport airport);
 
 };
 
