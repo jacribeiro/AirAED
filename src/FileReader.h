@@ -21,7 +21,13 @@ public:
      */
     unordered_map<string, Airline> readAirlinesFile(string fname);
 
+    /**
+     * Creates a map of the Airlines in the system, indexed by their ICAO code
+     * @param fname The name of the file to be read
+     * @return Map of the Airlines in the system
+     */
     unordered_map<string, Airport> readAirportFile(string fname);
+
     void readFlightsFile(string fname);
 
 };

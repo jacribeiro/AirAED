@@ -25,8 +25,8 @@ public:
     Flight(string airport, const Airline& company);
 
     /**
-     * Returns the destination airport
-     * @return the destination airport
+     * Returns ICAO code for the destination airport
+     * @return the ICAO code for the destination airport
      */
     string getDestination() const;
 

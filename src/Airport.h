@@ -75,17 +75,38 @@ public:
      */
     float getLongitude() const;
 
-
+    /**
+     * Marks the Airport as visited
+     */
     void visit();
 
+    /**
+     * Marks the airport as unvisited
+     */
     void unvisit();
 
+    /**
+     * Returns the visited status of the airport
+     * @return
+     */
     bool getvisited();
 
+    /**
+     * Returns the vector of Flights that depart from this Airport
+     * @return Vector of Flights that depart from this Airport
+     */
     vector<Flight> getFlights();
 
+    /**
+     * Returns the distance this airport is after the most recent BFS
+     * @return Distance this airport is after the most recent BFS
+     */
     int getDistance();
 
+    /**
+     * Sets the distance of the airport
+     * @param d The new distance to be set to the airport
+     */
     void setDistance(int d);
 };
 
