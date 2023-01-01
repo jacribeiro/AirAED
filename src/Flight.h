@@ -13,7 +13,7 @@ using namespace std;
 
 class Flight {
 
-    Airport destination;
+    string destination;
     Airline airline;
 
 public:
@@ -22,13 +22,13 @@ public:
      * @param destination The destination airport
      * @param company The airline responsible for the flight
      */
-    Flight(Airport airport, Airline company);
+    Flight(string airport, const Airline& company);
 
     /**
      * Returns the destination airport
      * @return the destination airport
      */
-    Airport getDestination() const;
+    string getDestination() const;
 
     /**
      * Returns the airline responsible for the flight
