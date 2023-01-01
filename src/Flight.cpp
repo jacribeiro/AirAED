@@ -4,9 +4,9 @@
 
 #include "Flight.h"
 
-Flight::Flight(Airport airport, Airline company): destination(airport), airline(company) {};
+Flight::Flight(string airport, const Airline& company): destination(airport), airline(company) {};
 
-Airport Flight::getDestination() const {
+string Flight::getDestination() const {
     return this->destination;
 }
 

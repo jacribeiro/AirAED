@@ -18,7 +18,7 @@ void AirManager::bfs(Airport airport) {
         auto u = q.front();
         q.pop();
         for(auto f : u.getFlights()){
-            Airport a = f.getDestination();
+            Airport a = airports.at(f.getDestination());
             if(!a.getvisited()){
                 q.push(a);
                 a.visit();
