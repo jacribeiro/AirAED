@@ -37,9 +37,9 @@ void AirManager::readFlightsFile(string fname) {
         string origin, destination, airline;
         while (getline(file, line)) {
             stringstream inputString(line);
-            getline(inputString, origin);
-            getline(inputString, destination);
-            getline(inputString, airline);
+            getline(inputString, origin, ',');
+            getline(inputString, destination, ',');
+            getline(inputString, airline, ',');
             Flight f1 = Flight(destination, airline);
             Airport airport = airports.at(origin);
             airport.addFlight(f1);

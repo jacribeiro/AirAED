@@ -24,8 +24,8 @@ class Airport {
     float longitude;
 
     vector<Flight> flights;
-    bool visited;
-    int distance;
+    bool visited = false;
+    int distance = 0;
 
 public:
     /**
