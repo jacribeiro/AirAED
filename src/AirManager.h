@@ -34,7 +34,7 @@ public:
      */
     void addFlight(Flight flight);
 
-    
+
     void bfs(Airport airport);
     void setAirlines(unordered_map<string, Airline> airlines);
     void setAirports(unordered_map<string, Airport> airports);
