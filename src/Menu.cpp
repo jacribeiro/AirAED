@@ -4,9 +4,12 @@
 
 #include "Menu.h"
 #include <iostream>
+#include "FileReader.h"
 using namespace std;
 
 Menu::Menu() {
+    FileReader reader = FileReader();
+    manager = AirManager(reader);
 }
 void Menu::show() {
     cout << "=================================\n";
@@ -33,14 +36,14 @@ void Menu::show() {
                 cout << "***We will need you to provide the Following Information:***\n\n";
                 cout << "-> Your Place of Departure" << "\n";
                 cout << "(Choose the type of data you would like to insert)" << "\n";
-                cout << "a) Airport Name\n";
-                cout << "b) Country Name\n";
+                cout << "a) Airport Code\n";
+                cout << "b) City Name\n";
                 cout << "c) Specific Coordinates (latitude and longitude)\n";
                 char l1;
                 cin >> l1;
                 switch (l1) {
                     case ('a'): {
-                        cout << "***Insert Airport Name***\n";
+                        cout << "***Insert Airport Code***\n";
                         cin >> name1;
                     }
                     case ('b'): {
@@ -55,14 +58,14 @@ void Menu::show() {
 
                 cout << "-> Your Desired Destination" << "\n";
                 cout << "(Choose the type of data you would like to insert)" << "\n";
-                cout << "a) Airport Name\n";
+                cout << "a) Airport Code (eg.: JFK)\n";
                 cout << "b) City Name\n";
                 cout << "c) Specific Coordinates (latitude and longitude)\n";
                 char l2;
                 cin >> l2;
                 switch (l2) {
                     case ('a'): {
-                        cout << "***Insert Airport Name***\n";
+                        cout << "***Insert Airport Code (eg.: JFK)***\n";
                         cin >> name2;
                     }
                     case ('b'): {
@@ -78,20 +81,20 @@ void Menu::show() {
             }
             case 2:{
                 cout << "***We will need you to provide the Following Information:***\n\n";
-                cout << "***Insert Airport Name***\n";
+                cout << "***Insert Airport Code (eg.: JFK)***\n";
                 cin >> name1;
                 showAirportInformation(manager, name1);
             }
             case 3:{
                 cout << "***We will need you to provide the Following Information:***\n\n";
-                cout << "***Insert the name of the Country***\n";
+                cout << "***Insert the name of the Country (eg.: France)***\n";
                 cin >> name1;
 
                 showCountryInformation(manager, name1);
             }
             case 4:{
                 cout << "***We will need you to provide the Following Information:***\n\n";
-                cout << "***Insert the name of the Country***\n";
+                cout << "***Insert the name of the Airline (eg.: TAP)***\n";
                 cin >> name1;
 
                 showAirlineInformation(manager, name1);
@@ -109,12 +112,9 @@ void Menu::showAirportInformation(AirManager &manager, string airport) {
 
 }
 void Menu::showBestRoute(AirManager &manager, std::string departure, std::string destination) {
-
 }
 
-void Menu::showCountryInformation(AirManager &manager, string country) {
 
-}
 
 void Menu::showAirlineInformation(AirManager &manager, string airline) {
 

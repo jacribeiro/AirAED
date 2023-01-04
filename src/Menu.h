@@ -12,8 +12,7 @@ using namespace std;
 
 
 class Menu {
-    AirManager manager= AirManager();
-
+    AirManager manager;
 public:
     /**
      * Default constructor for a Menu object
