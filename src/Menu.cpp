@@ -7,10 +7,8 @@
 #include "FileReader.h"
 using namespace std;
 
-Menu::Menu() {
-    FileReader reader = FileReader();
-    manager = AirManager(reader);
-}
+Menu::Menu(AirManager m): manager(m) {};
+
 void Menu::show() {
     cout << "=================================\n";
     cout << "Welcome to your Air Manager!\n";
@@ -114,7 +112,9 @@ void Menu::showAirportInformation(AirManager &manager, string airport) {
 void Menu::showBestRoute(AirManager &manager, std::string departure, std::string destination) {
 }
 
+void Menu::showCountryInformation(AirManager &manager, std::string country) {
 
+}
 
 void Menu::showAirlineInformation(AirManager &manager, string airline) {
 

@@ -28,8 +28,6 @@ public:
      */
     unordered_map<string, Airport> readAirportFile(string fname);
 
-    void readFlightsFile(string fname);
-
 };
 
 

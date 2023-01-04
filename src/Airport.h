@@ -108,6 +108,12 @@ public:
      * @param d The new distance to be set to the airport
      */
     void setDistance(int d);
+
+    /**
+     * Adds a Flight to the Airport
+     * @param flight A Flight object originating from this airport
+     */
+    void addFlight(const Flight& flight);
 };
 
 

@@ -3,9 +3,31 @@
 //
 
 #include <queue>
-#include <math.h>
+#include <cmath>
 #include "AirManager.h"
 
+AirManager::AirManager(FileReader r) {
+    this->reader = r;
+    setAirlines(r.readAirlinesFile("CSV/airlines.csv"));
+    setAirports(r.readAirportFile("CSV/airports.csv"));
+}
+
+void AirManager::setAirlines(unordered_map<std::string, Airline> airlines) {
+    this->airlines = airlines;
+}
+
+void AirManager::setAirports(unordered_map<std::string, Airport> airports) {
+    this->airports = airports;
+}
+
+void AirManager::addFlight(string origin, const Flight& flight) {
+    Airport airport = airports.at(origin);
+    airport.addFlight(flight);
+}
+
+void AirManager::readFlightsFile(string fname) {
+
+}
 
 void AirManager::bfs(Airport airport) {
     for (auto a : airports){
@@ -28,20 +50,6 @@ void AirManager::bfs(Airport airport) {
             }
         }
     }
-}
-
-AirManager::AirManager(FileReader r) {
-    this->reader = r;
-    setAirlines(r.readAirlinesFile("CSV/airlines.csv"));
-    setAirports(r.readAirportFile("CSV/airports.csv"));
-}
-
-void AirManager::setAirlines(unordered_map<std::string, Airline> airlines) {
-    this->airlines = airlines;
-}
-
-void AirManager::setAirports(unordered_map<std::string, Airport> airports) {
-    this->airports = airports;
 }
 
 float haversine(float p1long, float p1lat, float p2long, float p2lat){

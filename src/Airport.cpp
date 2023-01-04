@@ -57,3 +57,7 @@ int Airport::getDistance() {
 void Airport::setDistance(int d) {
     this->distance = d;
 }
+
+void Airport::addFlight(const Flight &flight) {
+    flights.push_back(flight);
+}
