@@ -3,6 +3,7 @@
 //
 
 #include <queue>
+#include <math.h>
 #include "AirManager.h"
 
 
@@ -43,3 +44,6 @@ void AirManager::setAirports(unordered_map<std::string, Airport> airports) {
     this->airports = airports;
 }
 
+float haversine(float p1long, float p1lat, float p2long, float p2lat){
+    return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
+}

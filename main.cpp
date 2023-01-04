@@ -1,8 +1,6 @@
 #include <iostream>
-#include "src/FileReader.h"
+#include "src/Menu.h"
 
 int main() {
-    FileReader reader = FileReader();
-    unordered_map<string, Airport> airports = reader.readAirportFile("CSV/airports.csv");
-
+    Menu menu = Menu();
 }

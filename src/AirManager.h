@@ -16,6 +16,7 @@ class AirManager {
     FileReader reader;
 
 public:
+    AirManager();
     /**
      * Creates a new AirManager object
      * @param r A FileReader object, to be used by the AirManager
@@ -38,7 +39,9 @@ public:
     void bfs(Airport airport);
     void setAirlines(unordered_map<string, Airline> airlines);
     void setAirports(unordered_map<string, Airport> airports);
+    float haversine(float p1long, float p1lat, float p2long, float p2lat);
 
+    vector<Airport> getCountryInformation(string country);
 };
 
 
