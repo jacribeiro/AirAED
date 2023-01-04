@@ -114,6 +114,13 @@ public:
      * @param flight A Flight object originating from this airport
      */
     void addFlight(const Flight& flight);
+
+    /**
+     * Equality comparator for Airport objects
+     * @param a2 The Airport object to compare to
+     * @return True if Airport objects are equal, false otherwise
+     */
+    bool operator == (const Airport& a2) const;
 };
 
 
