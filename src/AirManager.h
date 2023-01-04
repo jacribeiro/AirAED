@@ -41,6 +41,10 @@ public:
      */
     void addFlight(string origin, const Flight& flight);
 
+    /**
+     * Reads the file containing the flights, and adds them to the system
+     * @param fname Name of the file containing the flights
+     */
     void readFlightsFile(string fname);
 
     void bfs(Airport airport);

@@ -4,12 +4,16 @@
 
 #include <queue>
 #include <cmath>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 #include "AirManager.h"
 
 AirManager::AirManager(FileReader r) {
     this->reader = r;
     setAirlines(r.readAirlinesFile("CSV/airlines.csv"));
     setAirports(r.readAirportFile("CSV/airports.csv"));
+    readFlightsFile("CSV/flights.csv");
 }
 
 void AirManager::setAirlines(unordered_map<std::string, Airline> airlines) {
@@ -26,7 +30,23 @@ void AirManager::addFlight(string origin, const Flight& flight) {
 }
 
 void AirManager::readFlightsFile(string fname) {
-
+    string line;
+    ifstream file(fname);
+    if (file.is_open()) {
+        getline(file, line);
+        string origin, destination, airline;
+        while (getline(file, line)) {
+            stringstream inputString(line);
+            getline(inputString, origin);
+            getline(inputString, destination);
+            getline(inputString, airline);
+            Flight f1 = Flight(destination, airline);
+            Airport airport = airports.at(origin);
+            airport.addFlight(f1);
+        }
+    } else {
+        cout << "Could not open flights file" << endl;
+    }
 }
 
 void AirManager::bfs(Airport airport) {
