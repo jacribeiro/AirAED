@@ -41,7 +41,30 @@ public:
     void setAirports(unordered_map<string, Airport> airports);
     float haversine(float p1long, float p1lat, float p2long, float p2lat);
 
-    vector<Airport> getCountryInformation(string country);
+    /**
+     * It creates a vector with all the Airports of a country
+     * @param country string refering to country name
+     * @return vector with all the Airports of a country
+     */
+    vector<Airport> getCountryAirport(string country);
+    /**
+     * It creates a vector with all the AirLines of a country
+     * @param country string refering to country name
+     * @return vector with all the AirLines of a country
+     */
+    vector<Airline> getCountryAirline(string country);
+    /**
+     * It creates an Airline Object with all the the information of given Airline
+     * @param airlinecode string refering to airline code
+     * @return Object with all the information of the AirLine
+     */
+    Airline getAirlineInformation(string airlinecode);
+    /**
+     * It creates a vector with all the Airports the given Airline flies to
+     * @param airlinecode tring refering to airline code
+     * @return vector with all the Airports the given Airline flies to
+     */
+    vector<Airport> getAirlineDestinations(string airlinecode);
 };
 
 
