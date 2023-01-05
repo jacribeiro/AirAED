@@ -72,6 +72,42 @@ void AirManager::bfs(Airport airport) {
     }
 }
 
+
+vector<Airport> AirManager::getCountryAirport(string country) {
+    vector<Airport> v;
+    for (auto x : airports){
+        if (x.second.getCountry() == country){
+            v.push_back(x.second);
+        }
+    }
+    return v;
+
+}
+
+vector<Airline> AirManager::getCountryAirline(string country) {
+    vector<Airline> v;
+    for (auto x : airlines){
+        if (x.second.getCountry() == country){
+            v.push_back(x.second);
+        }
+    }
+    return v;
+}
+
+Airline AirManager::getAirlineInformation(string airlinecode) {
+    for (auto x : airlines){
+        if (x.second.getCode() == airlinecode){
+            Airline a = x.second;
+            return a;
+        }
+    }
+}
+
+vector<Airport> AirManager::getAirlineDestinations(string airlinecode) {
+    vector<Airport> v;
+
+}
+
 float haversine(float p1long, float p1lat, float p2long, float p2lat){
     return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
 }

@@ -4,6 +4,7 @@
 
 #include "Menu.h"
 #include <iostream>
+#include <iomanip>
 #include "FileReader.h"
 using namespace std;
 
@@ -92,7 +93,7 @@ void Menu::show() {
             }
             case 4:{
                 cout << "***We will need you to provide the Following Information:***\n\n";
-                cout << "***Insert the name of the Airline (eg.: TAP)***\n";
+                cout << "***Insert the code of the Airline (eg.: TAP)***\n";
                 cin >> name1;
 
                 showAirlineInformation(manager, name1);
@@ -112,11 +113,38 @@ void Menu::showAirportInformation(AirManager &manager, string airport) {
 void Menu::showBestRoute(AirManager &manager, std::string departure, std::string destination) {
 }
 
-void Menu::showCountryInformation(AirManager &manager, std::string country) {
+void Menu::showCountryInformation(AirManager &manager, string country) {
+    cout<<"==========================================================================";
+    vector<Airline> v1 = manager.getCountryAirline(country);
+    cout << "The Airline/s operating from " << country << ":\n";
+    cout<<"==========================================================================";
 
+    for (auto a: v1){
+        cout<<"✈✈✈ "<<a.getName()<<" "<<a.getNickname()<<'\n';
+    }
+    cout<<"==========================================================================\n\n";
+    vector<Airport> v2 = manager.getCountryAirport(country);
+    cout << "The Airports operating in " << country << ":\n";
+    cout << left << setw(4) << "A. Code" << left << setw(12) << "City" << left
+         << setw(12)<< "Airport";
+    cout<<"==========================================================================";
+    for (int i = 0; i < v2.size(); i++)
+    {
+        cout << left << setw(4) << v2[i].getCode()
+             << left << setw(12) << v2[i].getCity()
+             << left << setw(12) << v2[i].getName()
+             << endl;
+    }
+    cout<<"==========================================================================";
 }
 
 void Menu::showAirlineInformation(AirManager &manager, string airline) {
+    cout<<"======================================================================================================";
+    Airline v1 = manager.getAirlineInformation(airline);
+    cout << v1.getName()<< " ("<<v1.getNickname()<<") "<< "flies from "<<v1.getCountry()<<"to these DESTINATIONS:\n";
+    cout<<"======================================================================================================";
+    vector<Airport> v2 = manager.getAirlineDestinations(airline);
+
 
 }
 
