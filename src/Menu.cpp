@@ -8,10 +8,8 @@
 #include "FileReader.h"
 using namespace std;
 
-Menu::Menu() {
-    FileReader reader = FileReader();
-    manager = AirManager(reader);
-}
+Menu::Menu(AirManager m): manager(m) {};
+
 void Menu::show() {
     cout << "=================================\n";
     cout << "Welcome to your Air Manager!\n";

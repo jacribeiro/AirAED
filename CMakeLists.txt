@@ -30,4 +30,4 @@ else(DOXYGEN_FOUND)
     message("Doxygen needs to be installed to generate the documentation.")
 endif(DOXYGEN_FOUND)
 
-add_executable(AirAED src/Airport.cpp src/Airline.cpp src/Flight.cpp src/AirManager.cpp src/FileReader.cpp src/Menu.cpp main.cpp)
+add_executable(AirAED src/Airline.cpp src/Flight.cpp src/Airport.cpp src/FileReader.cpp src/AirManager.cpp src/Menu.cpp main.cpp)

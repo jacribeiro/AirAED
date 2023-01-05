@@ -57,3 +57,11 @@ int Airport::getDistance() {
 void Airport::setDistance(int d) {
     this->distance = d;
 }
+
+void Airport::addFlight(const Flight &flight) {
+    flights.push_back(flight);
+}
+
+bool Airport::operator==(const Airport &a2) const {
+    return this->code == a2.code;
+}

@@ -16,7 +16,6 @@ class AirManager {
     FileReader reader;
 
 public:
-    AirManager();
     /**
      * Creates a new AirManager object
      * @param r A FileReader object, to be used by the AirManager
@@ -24,22 +23,31 @@ public:
     AirManager(FileReader r);
 
     /**
-     * Adds an Airport to the system
-     * @param airport The airport to be added to the system
+     * Sets the airlines that will be in the system
+     * @param airlines Unordered_map of airlines to be added to the system
      */
-    void addAirport(Airport airport);
+    void setAirlines(unordered_map<string, Airline> airlines);
+
+    /**
+     * Sets the airports that will be in the system
+     * @param airports Unordered_map of airports to be added to the system
+     */
+    void setAirports(unordered_map<string, Airport> airports);
 
     /**
      * Adds a Flight to the system
-     * @param flight The flight to be added to the system
+     * @param origin IATA code of the airport of origin
+     * @param flight Flight object to be added
      */
-    void addFlight(Flight flight);
+    void addFlight(string origin, const Flight& flight);
 
-    
+    /**
+     * Reads the file containing the flights, and adds them to the system
+     * @param fname Name of the file containing the flights
+     */
+    void readFlightsFile(string fname);
+
     void bfs(Airport airport);
-    void setAirlines(unordered_map<string, Airline> airlines);
-    void setAirports(unordered_map<string, Airport> airports);
-    float haversine(float p1long, float p1lat, float p2long, float p2lat);
 
     /**
      * It creates a vector with all the Airports of a country

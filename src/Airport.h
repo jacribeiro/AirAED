@@ -24,8 +24,8 @@ class Airport {
     float longitude;
 
     vector<Flight> flights;
-    bool visited;
-    int distance;
+    bool visited = false;
+    int distance = 0;
 
 public:
     /**
@@ -108,6 +108,19 @@ public:
      * @param d The new distance to be set to the airport
      */
     void setDistance(int d);
+
+    /**
+     * Adds a Flight to the Airport
+     * @param flight A Flight object originating from this airport
+     */
+    void addFlight(const Flight& flight);
+
+    /**
+     * Equality comparator for Airport objects
+     * @param a2 The Airport object to compare to
+     * @return True if Airport objects are equal, false otherwise
+     */
+    bool operator == (const Airport& a2) const;
 };
 
 
