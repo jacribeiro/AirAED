@@ -2,5 +2,5 @@
 #include "src/Menu.h"
 
 int main() {
-    Menu menu = Menu();
+    Menu menu = Menu(AirManager(FileReader()));
 }

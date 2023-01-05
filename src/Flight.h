@@ -7,22 +7,21 @@
 
 #include <string>
 #include "Airline.h"
-#include "Airport.h"
 
 using namespace std;
 
 class Flight {
 
     string destination;
-    Airline airline;
+    string airline;
 
 public:
     /**
      * Creates a new Flight object
-     * @param destination The destination airport
-     * @param company The airline responsible for the flight
+     * @param airport IATA code for the origin airport
+     * @param airline ICAO code for the airline responsible for the flight
      */
-    Flight(string airport, const Airline& company);
+    Flight(string airport, string airline);
 
     /**
      * Returns ICAO code for the destination airport
@@ -34,7 +33,7 @@ public:
      * Returns the airline responsible for the flight
      * @return the airline responsible for the flight
      */
-    Airline getAirline() const;
+    string getAirline() const;
 };
 
 

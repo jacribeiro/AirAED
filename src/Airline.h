@@ -49,6 +49,13 @@ public:
      * @return the airline's country of origin
      */
     string getCountry() const;
+
+    /**
+     * Equality comparator for Airline objects
+     * @param a2 The Airline object to compare to
+     * @return True if Airline objects are equal, false otherwise
+     */
+    bool operator == (const Airline& a2) const;
 };
 
 

@@ -13,15 +13,19 @@ using namespace std;
 
 class Menu {
     AirManager manager;
+
 public:
     /**
-     * Default constructor for a Menu object
+     * Creates a new Menu object
+     * @param m AirManager object to be used by the Menu
      */
-    Menu();
+    Menu(AirManager m);
+
     /**
     * Prints Instructions to the user
     */
     void show();
+
     /**
      * Prints The best route available between two places
      * @param manager Reference to a AirManager object that will perform the operation
@@ -29,18 +33,21 @@ public:
      * @param destination string representing desired destination
      */
     void showBestRoute(AirManager &manager, string departure, string destination);
+
     /**
      * Prints all the available Information about an Airport
      * @param manager Reference to a AirManager object that will perform the operation
      * @param airport string representing an airports name
      */
     void showAirportInformation(AirManager &manager, string airport);
+
     /**
      * Prints all the available flight related information about a Country
      * @param manager Reference to a AirManager object that will perform the operation
      * @param airport string representing the nome of a country
      */
     void showCountryInformation(AirManager &manager, string country);
+
     /**
      * Prints all the available flight related information about an Airline
      * @param manager Reference to a AirManager object that will perform the operation
