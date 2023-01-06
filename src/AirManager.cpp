@@ -100,31 +100,27 @@ vector<Airline> AirManager::getCountryAirline(string country) {
 }
 
 Airline AirManager::getAirlineInformation(string airlinecode) {
-    auto it = airlines.find(airlinecode);
-    auto x = (*it);
-    return x.second;
+    auto x = airlines.at(airlinecode);
+    return x;
 }
 
 vector<Flight> AirManager::getAirportDestinations(string airportcode) {
     vector<Flight> v;
-    auto it = airports.find(airportcode);
-    auto x =(*it);
-    for (auto y: x.second.getFlights()) v.push_back(y);
+    auto x = airports.at(airportcode);
+    v = x.getFlights();
     return v;
 
 }
 
 Airport AirManager::getAirportInformation(string airportcode) {
-    auto it = airports.find(airportcode);
-    auto x = (*it);
-    return x.second;
+    auto x = airports.at(airportcode);
+    return x;
 }
 
 int AirManager::getNumAirlinesByAirport(string airport) {
     set<string> s;
-    auto it = airports.find(airport);
-    auto x = (*it);
-    for (auto a: x.second.getFlights()){
+    auto x = airports.at(airport);
+    for (auto a: x.getFlights()){
         s.insert(a.getAirline());
     }
     return s.size();
@@ -132,9 +128,8 @@ int AirManager::getNumAirlinesByAirport(string airport) {
 
 int AirManager::getNumDestinationsByAirport(string airport) {
     set<string> s;
-    auto it = airports.find(airport);
-    auto x = (*it);
-    for (auto a: x.second.getFlights()){
+    auto x = airports.at(airport);
+    for (auto a: x.getFlights()){
         s.insert(a.getDestination());
     }
     return s.size();
@@ -142,9 +137,8 @@ int AirManager::getNumDestinationsByAirport(string airport) {
 
 int AirManager::getNumFlightsByAirport(string airport) {
     set<string> s;
-    auto it = airports.find(airport);
-    auto x = (*it);
-    return x.second.getFlights().size();
+    auto x = airports.at(airport);
+    return x.getFlights().size();
 }
 
 int AirManager::getNumAirportsInCountry(string country) {
