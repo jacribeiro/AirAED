@@ -3,4 +3,5 @@
 
 int main() {
     Menu menu = Menu(AirManager(FileReader()));
+    menu.show();
 }

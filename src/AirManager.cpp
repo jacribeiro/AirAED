@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <set>
 #include "AirManager.h"
 
 AirManager::AirManager(FileReader r) {
@@ -95,18 +96,89 @@ vector<Airline> AirManager::getCountryAirline(string country) {
 }
 
 Airline AirManager::getAirlineInformation(string airlinecode) {
-    for (auto x : airlines){
-        if (x.second.getCode() == airlinecode){
-            Airline a = x.second;
-            return a;
+    auto it = airlines.find(airlinecode);
+    auto x = (*it);
+    return x.second;
+}
+
+vector<Flight> AirManager::getAirportDestinations(string airportcode) {
+    vector<Flight> v;
+    auto it = airports.find(airportcode);
+    auto x =(*it);
+    for (auto y: x.second.getFlights()) v.push_back(y);
+    return v;
+
+}
+
+Airport AirManager::getAirportInformation(string airportcode) {
+    auto it = airports.find(airportcode);
+    auto x = (*it);
+    return x.second;
+}
+
+int AirManager::getNumAirlinesByAirport(string airport) {
+    set<string> s;
+    auto it = airports.find(airport);
+    auto x = (*it);
+    for (auto a: x.second.getFlights()){
+        s.insert(a.getAirline());
+    }
+    return s.size();
+}
+
+int AirManager::getNumDestinationsByAirport(string airport) {
+    set<string> s;
+    auto it = airports.find(airport);
+    auto x = (*it);
+    for (auto a: x.second.getFlights()){
+        s.insert(a.getDestination());
+    }
+    return s.size();
+}
+
+int AirManager::getNumFlightsByAirport(string airport) {
+    set<string> s;
+    auto it = airports.find(airport);
+    auto x = (*it);
+    return x.second.getFlights().size();
+}
+
+int AirManager::getNumAirportsInCountry(string country) {
+    auto v = getCountryAirport(country);
+    return v.size();
+}
+
+int AirManager::getNumDestinationsByCountry(string country) {
+    set<string> s;
+    auto v = getCountryAirport(country);
+    for (auto x: v){
+        for (auto a: getAirportDestinations(x.getCode())){
+            s.insert(a.getDestination());
         }
     }
+    return s.size();
 }
 
-vector<Airport> AirManager::getAirlineDestinations(string airlinecode) {
-    vector<Airport> v;
-
+int AirManager::getNumAirlinesByCountry(string country) {
+    set<string> s;
+    auto v = getCountryAirport(country);
+    for (auto x: v){
+        for (auto a: getAirportDestinations(x.getCode())){
+            s.insert(a.getAirline());
+        }
+    }
+    return s.size();
 }
+
+int AirManager::getNumFlightsByCountry(string country) {
+    set<string> s;
+    auto v = getCountryAirport(country);
+    for (auto x: v){
+        s.insert(x.getCode());
+    }
+    return s.size();
+}
+
 
 float haversine(float p1long, float p1lat, float p2long, float p2lat){
     return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));

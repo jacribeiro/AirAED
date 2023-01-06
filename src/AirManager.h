@@ -68,11 +68,60 @@ public:
      */
     Airline getAirlineInformation(string airlinecode);
     /**
-     * It creates a vector with all the Airports the given Airline flies to
-     * @param airlinecode tring refering to airline code
-     * @return vector with all the Airports the given Airline flies to
+     * It creates a vector with all the Destinations you can fly to from the given Airport
+     * @param airlinecode string refering to airline code
+     * @return vector with all the Destinations you can fly to from the given Airport
      */
-    vector<Airport> getAirlineDestinations(string airlinecode);
+    vector<Flight> getAirportDestinations(string airlinecode);
+    /**
+     * Creates Airport Object with the given airportcode
+     * @param airportcode string refering to airport code
+     * @return  Airport Object with the given airportcode
+     */
+    Airport getAirportInformation(string airportcode);
+    /**
+     * Counts the number of airlines that fly from/to the given Airport
+     * @param airport string refering to airport code
+     * @return the number of airlines that fly from/to the given Airport
+     */
+    int getNumAirlinesByAirport(string airport);
+    /**
+     * Counts the number of destinations you can fly from the given Airport
+     * @param airport string refering to airport code
+     * @return the number of destinations you fly can from the given Airport
+     */
+    int getNumDestinationsByAirport(string airport);
+    /**
+     * Counts the number of flights from the given Airport
+     * @param airport string refering to airport code
+     * @return the number of flights from the given Airport
+     */
+    int getNumFlightsByAirport(string airport);
+    /**
+     * Counts the number of National Airports
+     * @param country string refering to country Name
+     * @return the number of National Airports
+     */
+    int getNumAirportsInCountry(string country);
+
+    /**
+    * Counts the number of destinations you can fly from the given Country
+    * @param country string refering to country Name
+    * @return the number of destinations you can fly from the given Country
+    */
+    int getNumDestinationsByCountry(string country);
+    /**
+    * Counts the number of airlines you can fly from the given Country
+    * @param country string refering to country Name
+    * @return the number of airlines you can fly from the given Country
+    */
+    int getNumAirlinesByCountry(string country);
+    /**
+    * Counts the number of flights you can fly from the given Country
+    * @param country string refering to country Name
+    * @return the number of flights you can fly from the given Country
+    */
+    int getNumFlightsByCountry(string country);
 };
 
 
