@@ -44,17 +44,17 @@ void Menu::show() {
                 cin >> l1;
                 switch (l1) {
                     case ('a'): {
-                        cout << "***Insert Airport Code***\n";
+                        cout << "***Insert Airport Code (eg.: JFK)***\n";
                         cin >> name1;
                         break;
                     }
                     case ('b'): {
-                        cout << "***Insert City Name***\n";
+                        cout << "***Insert City Name (eg.: Paris)***\n";
                         cin >> name1;
                         break;
                     }
                     case ('c'): {
-                        cout << "***Insert the specific Coordinates***\n";
+                        cout << "***Insert the specific Coordinates, separated by a comma (eg.: 47.833,02.902)***\n";
                         cin >> name1;
                         break;
                     }
@@ -62,7 +62,7 @@ void Menu::show() {
 
                 cout << "-> Your Desired Destination" << "\n";
                 cout << "(Choose the type of data you would like to insert)" << "\n";
-                cout << "a) Airport Code (eg.: JFK)\n";
+                cout << "a) Airport Code\n";
                 cout << "b) City Name\n";
                 cout << "c) Specific Coordinates (latitude and longitude)\n";
                 char l2;
@@ -71,14 +71,17 @@ void Menu::show() {
                     case ('a'): {
                         cout << "***Insert Airport Code (eg.: JFK)***\n";
                         cin >> name2;
+                        break;
                     }
                     case ('b'): {
-                        cout << "***Insert City Name***\n";
+                        cout << "***Insert City Name (eg.: Paris)***\n";
                         cin >> name2;
+                        break;
                     }
                     case ('c'): {
-                        cout << "***Insert the specific Coordinates***\n";
+                        cout << "***Insert the specific Coordinates, separated by a comma (eg.: 47.833,02.902)***\n";
                         cin >> name2;
+                        break;
                     }
                 }
                 showBestRoute(manager, name1, name2);
@@ -166,12 +169,13 @@ void Menu::showAirportInformation(AirManager &manager, string airport) {
 
 }
 void Menu::showBestRoute(AirManager &manager, std::string departure, std::string destination) {
+
 }
 
 void Menu::showCountryAirlines(AirManager &manager, string country){
         cout << "==========================================================================\n";
         vector<Airline> v1 = manager.getCountryAirline(country);
-        cout << "The Airline/s operating from " << country << ":\n";
+        cout << "The Airline(s) operating from " << country << ":\n";
         cout << "==========================================================================\n";
         for (auto a: v1) {
             cout << "---> " << a.getName() << " (" << a.getNickname() << ")" << '\n';

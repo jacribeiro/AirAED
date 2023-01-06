@@ -42,8 +42,7 @@ void AirManager::readFlightsFile(string fname) {
             getline(inputString, destination, ',');
             getline(inputString, airline, ',');
             Flight f1 = Flight(destination, airline);
-            Airport airport = airports.at(origin);
-            airport.addFlight(f1);
+            addFlight(origin, f1);
         }
     } else {
         cout << "Could not open flights file" << endl;
@@ -71,6 +70,11 @@ void AirManager::bfs(Airport airport) {
             }
         }
     }
+}
+
+int AirManager::bestRouteAirports(string origin, string destination) {
+    bfs(airports.at(origin));
+    return airports.at(destination).getDistance();
 }
 
 

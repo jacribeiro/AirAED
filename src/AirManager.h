@@ -49,6 +49,9 @@ public:
 
     void bfs(Airport airport);
 
+
+    int bestRouteAirports(string origin, string destination);
+
     /**
      * It creates a vector with all the Airports of a country
      * @param country string refering to country name
