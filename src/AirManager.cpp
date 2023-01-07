@@ -217,6 +217,24 @@ int AirManager::getNumFlightsByAirline(string airline) {
     return v.size();
 }
 
+int AirManager::getGlobalNumCountries() {
+    set<string> s;
+    for (auto x : airports){
+        s.insert(x.second.getCountry());
+    }
+    s.size();
+}
+
+int AirManager::getGlobalNumFlights() {
+    int cont = 0;
+    for (auto a: airports){
+        for (Flight f: a.second.getFlights()){
+            cont++;
+        }
+    }
+    return cont;
+}
+
 float haversine(float p1long, float p1lat, float p2long, float p2lat){
     return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
 }

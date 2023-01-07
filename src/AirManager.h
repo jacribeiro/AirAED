@@ -148,6 +148,10 @@ public:
      * @return the number(int) of flight you can take using the given Airline
      */
     int getNumFlightsByAirline(string airline);
+
+    int getGlobalNumCountries();
+
+    int getGlobalNumFlights();
 };
 
 

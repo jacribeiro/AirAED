@@ -274,8 +274,8 @@ void Menu::showAirlineStatistics(AirManager &manager, std::string airline) {
 void Menu::showGlobalStatistics(AirManager manager) {
     int n_airports = manager.getAirports().size();
     int n_airlines = manager.getAirlines().size();
-    int n_countries = manager.getNumCountriesByAirline();
-
+    int n_countries = manager.getGlobalNumCountries();
+    int n_flights = manager.getGlobalNumFlights();
 
     cout<<"==========================================================================\n";
     cout<<"This Network's Global Flight-related Statistics:\n";
