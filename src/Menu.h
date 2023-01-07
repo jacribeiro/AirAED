@@ -42,18 +42,40 @@ public:
     void showAirportInformation(AirManager &manager, string airport);
 
     /**
-     * Prints all the available flight related information about a Country
+     * Prints the Airport information about a Country
      * @param manager Reference to a AirManager object that will perform the operation
      * @param airport string representing the nome of a country
      */
-    void showCountryInformation(AirManager &manager, string country);
+    void showCountryAirports(AirManager &manager, string country);
+    /**
+     * Prints the Airline information about a Country
+     * @param manager Reference to a AirManager object that will perform the operation
+     * @param airport string representing the nome of a country
+     */
 
+    void showCountryAirlines(AirManager &manager, string country);
     /**
      * Prints all the available flight related information about an Airline
      * @param manager Reference to a AirManager object that will perform the operation
      * @param airline string representing the nome of an airline
      */
     void showAirlineInformation(AirManager &manager, string airline);
+    /**
+     * Prints all the available flight related statistics about an Airport
+     * @param manager Reference to a AirManager object that will perform the operation
+     * @param airport string representing the nome of an airport
+     */
+    void showAirportStatistics(AirManager &manager, string airport);
+/**
+     * Prints all the available flight related statistics about a Country
+     * @param manager Reference to a AirManager object that will perform the operation
+     * @param airport string representing the nome of a country
+     */
+    void showCountryStatistics(AirManager manager, string country);
+
+    void showAirlineStatistics(AirManager &manager, string airline);
+
+    void showGlobalStatistics(AirManager manager);
 };
 
 

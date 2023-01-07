@@ -21,7 +21,16 @@ public:
      * @param r A FileReader object, to be used by the AirManager
      */
     AirManager(FileReader r);
-
+    /**
+     * Returns the airports that will be in the system
+     * @return Unordered_map of airports in the system
+     */
+    unordered_map<string, Airport> getAirports();
+    /**
+     * Returns the airlines that will be in the system
+     * @return Unordered_map of airlines in the system
+     */
+    unordered_map<string, Airline> getAirlines();
     /**
      * Sets the airlines that will be in the system
      * @param airlines Unordered_map of airlines to be added to the system
@@ -46,7 +55,6 @@ public:
      * @param fname Name of the file containing the flights
      */
     void readFlightsFile(string fname);
-
     void bfs(Airport airport);
 
     /**
@@ -68,11 +76,78 @@ public:
      */
     Airline getAirlineInformation(string airlinecode);
     /**
-     * It creates a vector with all the Airports the given Airline flies to
-     * @param airlinecode tring refering to airline code
-     * @return vector with all the Airports the given Airline flies to
+     * It creates a vector with all the Destinations you can fly to from the given Airport
+     * @param airlinecode string refering to airline code
+     * @return vector with all the Destinations you can fly to from the given Airport
+     */
+    vector<Flight> getAirportDestinations(string airlinecode);
+    /**
+     * Creates Airport Object with the given airportcode
+     * @param airportcode string refering to airport code
+     * @return  Airport Object with the given airportcode
+     */
+    Airport getAirportInformation(string airportcode);
+    /**
+     * Counts the number of airlines that fly from/to the given Airport
+     * @param airport string refering to airport code
+     * @return the number(int) of airlines that fly from/to the given Airport
+     */
+    int getNumAirlinesByAirport(string airport);
+    /**
+     * Counts the number of destinations you can fly from the given Airport
+     * @param airport string refering to airport code
+     * @return the number(int) of destinations you fly can from the given Airport
+     */
+    int getNumDestinationsByAirport(string airport);
+    /**
+     * Counts the number of flights from the given Airport
+     * @param airport string refering to airport code
+     * @return the number(int) of flights from the given Airport
+     */
+    int getNumFlightsByAirport(string airport);
+    /**
+     * Counts the number of National Airports
+     * @param country string refering to country Name
+     * @return the number(int) of National Airports
+     */
+    int getNumAirportsInCountry(string country);
+
+    /**
+    * Counts the number of destinations you can fly from the given Country
+    * @param country string refering to country Name
+    * @return the number(int) of destinations you can fly from the given Country
+    */
+    int getNumDestinationsByCountry(string country);
+    /**
+    * Counts the number of airlines you can fly from the given Country
+    * @param country string refering to country Name
+    * @return the number(int) of airlines you can fly from the given Country
+    */
+    int getNumAirlinesByCountry(string country);
+    /**
+    * Counts the number of flights you can fly from the given Country
+    * @param country string refering to country Name
+    * @return the number(int) of flights you can fly from the given Country
+    */
+    int getNumFlightsByCountry(string country);
+    /**
+     * Creates a vector of Airports you can fly to, using the given Airline
+     * @param airlinecode string refering to specific Airline Code
+     * @return a vector of Airports  you can fly to, using the given Airline
      */
     vector<Airport> getAirlineDestinations(string airlinecode);
+    /**
+     * Counts the number of countries you can fly to, using the given Airline
+     * @param airline string refering to specific Airline Code
+     * @return the number(int) of countries you can fly to, using the given Airline
+     */
+    int getNumCountriesByAirline(string airline);
+    /**
+     * Counts the number of flight you can take using the given Airline
+     * @param airline string refering to specific Airline Code
+     * @return the number(int) of flight you can take using the given Airline
+     */
+    int getNumFlightsByAirline(string airline);
 };
 
 

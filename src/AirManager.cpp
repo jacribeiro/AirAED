@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <set>
 #include "AirManager.h"
 
 AirManager::AirManager(FileReader r) {
@@ -14,6 +15,14 @@ AirManager::AirManager(FileReader r) {
     setAirlines(r.readAirlinesFile("CSV/airlines.csv"));
     setAirports(r.readAirportFile("CSV/airports.csv"));
     readFlightsFile("CSV/flights.csv");
+}
+
+unordered_map<string, Airport> AirManager::getAirports() {
+    return airports;
+}
+
+unordered_map<string, Airline> AirManager::getAirlines() {
+    return airlines;
 }
 
 void AirManager::setAirlines(unordered_map<std::string, Airline> airlines) {
@@ -41,8 +50,8 @@ void AirManager::readFlightsFile(string fname) {
             getline(inputString, destination, ',');
             getline(inputString, airline, ',');
             Flight f1 = Flight(destination, airline);
-            Airport airport = airports.at(origin);
-            airport.addFlight(f1);
+            auto it = airports.find(origin);
+            it->second.addFlight(f1);
         }
     } else {
         cout << "Could not open flights file" << endl;
@@ -95,17 +104,117 @@ vector<Airline> AirManager::getCountryAirline(string country) {
 }
 
 Airline AirManager::getAirlineInformation(string airlinecode) {
-    for (auto x : airlines){
-        if (x.second.getCode() == airlinecode){
-            Airline a = x.second;
-            return a;
+    auto x = airlines.at(airlinecode);
+    return x;
+}
+
+vector<Flight> AirManager::getAirportDestinations(string airportcode) {
+    vector<Flight> v;
+    auto x = airports.at(airportcode);
+    v = x.getFlights();
+    return v;
+
+}
+
+Airport AirManager::getAirportInformation(string airportcode) {
+    auto x = airports.at(airportcode);
+    return x;
+}
+
+int AirManager::getNumAirlinesByAirport(string airport) {
+    set<string> s;
+    auto x = airports.at(airport);
+    for (auto a: x.getFlights()){
+        s.insert(a.getAirline());
+    }
+    return s.size();
+}
+
+int AirManager::getNumDestinationsByAirport(string airport) {
+    set<string> s;
+    auto x = airports.at(airport);
+    for (auto a: x.getFlights()){
+        s.insert(a.getDestination());
+    }
+    return s.size();
+}
+
+int AirManager::getNumFlightsByAirport(string airport) {
+    set<string> s;
+    auto x = airports.at(airport);
+    return x.getFlights().size();
+}
+
+int AirManager::getNumAirportsInCountry(string country) {
+    auto v = getCountryAirport(country);
+    return v.size();
+}
+
+int AirManager::getNumDestinationsByCountry(string country) {
+    set<string> s;
+    auto v = getCountryAirport(country);
+    for (auto x: v){
+        for (auto a: getAirportDestinations(x.getCode())){
+            s.insert(a.getDestination());
         }
     }
+    return s.size();
+}
+
+int AirManager::getNumAirlinesByCountry(string country) {
+    set<string> s;
+    auto v = getCountryAirport(country);
+    for (auto x: v){
+        for (auto a: getAirportDestinations(x.getCode())){
+            s.insert(a.getAirline());
+        }
+    }
+    return s.size();
+}
+
+int AirManager::getNumFlightsByCountry(string country) {
+    vector<string> s;
+    auto v = getCountryAirport(country);
+    for (auto x: v){
+        for(auto f: x.getFlights()){
+            s.push_back(f.getDestination());
+        }
+    }
+    return s.size();
 }
 
 vector<Airport> AirManager::getAirlineDestinations(string airlinecode) {
-    vector<Airport> v;
+     vector<Airport> v;
+     set<string> s;
+     for (auto x: airports){
+         for (auto f : x.second.getFlights()){
+             if (f.getAirline() == airlinecode) s.insert(x.second.getCode());
+         }
+     }
+     for (auto x: s){
+         Airport a = getAirportInformation(x);
+         v.push_back(a);
+     }
+     return v;
+}
 
+int AirManager::getNumCountriesByAirline(string airline) {
+    set<string> s;
+    auto v = getAirlineDestinations(airline);
+    for (auto x: v){
+        s.insert(x.getCountry());
+    }
+    return s.size();
+}
+
+int AirManager::getNumFlightsByAirline(string airline) {
+    vector<Flight> v;
+    for (auto x: airports){
+        for (auto f : x.second.getFlights()){
+            if (f.getAirline() == airline) v.push_back(f);
+        }
+    }
+    return v.size();
 }
 
 float haversine(float p1long, float p1lat, float p2long, float p2lat){
