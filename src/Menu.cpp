@@ -8,10 +8,8 @@
 #include "FileReader.h"
 using namespace std;
 
-Menu::Menu() {
-    FileReader reader = FileReader();
-    manager = AirManager(reader);
-}
+Menu::Menu(AirManager m): manager(m) {};
+
 void Menu::show() {
     cout << "=================================\n";
     cout << "Welcome to your Air Manager!\n";
@@ -274,7 +272,7 @@ void Menu::showAirlineStatistics(AirManager &manager, std::string airline) {
 void Menu::showGlobalStatistics(AirManager manager) {
     int n_airports = manager.getAirports().size();
     int n_airlines = manager.getAirlines().size();
-    int n_countries = manager.getGlobalNumCountries();
+    //int n_countries = manager.getGlobalNumCountries();
     int n_flights = manager.getGlobalNumFlights();
 
     cout<<"==========================================================================\n";
@@ -282,7 +280,7 @@ void Menu::showGlobalStatistics(AirManager manager) {
     cout<<"==========================================================================\n";
     cout<<"Number of Flights ---> "<<n_flights<<endl;
     cout<<"Number of Airports ---> "<<n_airports<<endl;
-    cout<<"Number of Countries ---> "<<n_countries<<endl;
+    //cout<<"Number of Countries ---> "<<n_countries<<endl;
     cout<<"Number of Airlines---> "<<n_airlines<<endl;
     cout<<"==========================================================================\n";
 

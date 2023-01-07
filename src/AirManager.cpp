@@ -222,7 +222,7 @@ int AirManager::getGlobalNumCountries() {
     for (auto x : airports){
         s.insert(x.second.getCountry());
     }
-    s.size();
+    return s.size();
 }
 
 int AirManager::getGlobalNumFlights() {
