@@ -22,12 +22,14 @@ void Menu::show() {
     while (flag) {
         cout << "\nHello, " << name << "!\nWhat would do you like to do today? (eg.: 4)\n";
         cout << "1. Check the Best Route Available.\n";
-        cout << "2. Check Airport Information.\n";
+        cout << "2. Check Airport's Flight Information.\n";
         cout << "3. Check Airport Statistics.\n";
-        cout << "4. Check Country Information.\n";
+        cout << "4. Check Countries Flight Information.\n";
         cout << "5. Check Country Statistics.\n";
-        cout << "6. Check Airline Information.\n";
-        cout << "7. Quit.\n";
+        cout << "6. Check Airline Flight Information.\n";
+        cout << "7. Check Airline Statistics.\n";
+        cout << "8. Check Global Statistics.\n";
+        cout << "9. Quit.\n";
         int n1;
         cin >> n1;
         string name1;
@@ -133,10 +135,21 @@ void Menu::show() {
                     cout << "***We will need you to provide the Following Information:***\n\n";
                     cout << "***Insert the code of the Airline (eg.: TAP)***\n";
                     cin >> name1;
-//                    showAirlineInformation(manager, name1);
+                    showAirlineInformation(manager, name1);
                     break;
             }
             case 7: {
+                cout << "***We will need you to provide the Following Information:***\n\n";
+                cout << "***Insert the code of the Airline (eg.: TAP)***\n";
+                cin >> name1;
+                showAirlineStatistics(manager, name1);
+                break;
+            }
+            case 8: {
+                showGlobalStatistics(manager);
+                break;
+            }
+            case 9: {
                     flag = false;
                     cout << "***You have successfully exited your Air Manager!***";
             }
@@ -156,13 +169,13 @@ void Menu::showAirportInformation(AirManager &manager, string airport) {
     vector<Flight> v2 = manager.getAirportDestinations(airport);
     cout <<"From the "<<v1.getName()<< " Airport ("<<v1.getCountry()<<") "<< "you can fly from "<<v1.getCity()<<" to these DESTINATIONS:\n";
     cout<<"===============================================================================\n";
-    cout << left << setw(32) << "City (Country)" << left << setw(22) << "Airline"<<endl;
+    cout << left << setw(42) << "City (Country)" << left << setw(22) << "Airline"<<endl;
     cout<<"===============================================================================\n";
     for (auto x : v2){
         Airport a1 = manager.getAirportInformation(x.getDestination());
         Airline a2 = manager.getAirlineInformation(x.getAirline());
-        cout << left << setw(32) << a1.getCity() << " ("<<a1.getCountry()<<")"
-             << left << setw(22) << x.getAirline()
+        cout << left << setw(42) << a1.getCity() + " ("+a1.getCountry()+")"
+             << left << setw(32) << a2.getName()
              << endl;
     }
     cout<<"===============================================================================\n";
@@ -229,6 +242,52 @@ void Menu::showCountryStatistics(AirManager manager, string country) {
     cout<<"Number of Destinations ---> "<<n_destinations<<endl;
     cout<<"Number of Airlines ---> "<<n_airlines<<endl;
     cout<<"==========================================================================\n";
+}
+
+void Menu::showAirlineInformation(AirManager &manager, std::string airline) {
+    Airline a = manager.getAirlineInformation(airline);
+    cout <<"Flying with "<<a.getName()<< " based in "<<a.getCountry()<<" you can fly to these DESTINATIONS:\n";
+    cout<<"===============================================================================\n";
+    cout << left << setw(42) << "City (Country)" << left<< setw(42) << "Airport"<<endl;
+    cout<<"===============================================================================\n";
+    vector<Airport> v = manager.getAirlineDestinations(airline);
+    for (auto x : v){
+        cout << left << setw(42) << x.getCity() + " ("+x.getCountry()+")"
+             << left << setw(42) << x.getName() + " Airport"
+             << endl;
+    }
+    cout<<"===============================================================================\n";
+}
+
+void Menu::showAirlineStatistics(AirManager &manager, std::string airline) {
+    Airline a = manager.getAirlineInformation(airline);
+    int n_airports = manager.getAirlineDestinations(airline).size();
+    int n_countries = manager.getNumCountriesByAirline(airline);
+    int n_flights = manager.getNumFlightsByAirline(airline);
+    cout<<"==========================================================================\n";
+    cout<<a.getName()<<"'s Flight-related Statistics:\n";
+    cout<<"==========================================================================\n";
+    cout<<"Number of Flights ---> "<<n_flights<<endl;
+    cout<<"Number of Airports ---> "<<n_airports<<endl;
+    cout<<"Number of Countries ---> "<<n_countries<<endl;
+    cout<<"==========================================================================\n";
+}
+
+void Menu::showGlobalStatistics(AirManager manager) {
+    int n_airports = manager.getAirports().size();
+    int n_airlines = manager.getAirlines().size();
+    //int n_countries = manager.getGlobalNumCountries();
+    int n_flights = manager.getGlobalNumFlights();
+
+    cout<<"==========================================================================\n";
+    cout<<"This Network's Global Flight-related Statistics:\n";
+    cout<<"==========================================================================\n";
+    cout<<"Number of Flights ---> "<<n_flights<<endl;
+    cout<<"Number of Airports ---> "<<n_airports<<endl;
+    //cout<<"Number of Countries ---> "<<n_countries<<endl;
+    cout<<"Number of Airlines---> "<<n_airlines<<endl;
+    cout<<"==========================================================================\n";
+
 }
 
 
