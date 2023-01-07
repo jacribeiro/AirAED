@@ -17,6 +17,14 @@ AirManager::AirManager(FileReader r) {
     readFlightsFile("CSV/flights.csv");
 }
 
+unordered_map<string, Airport> AirManager::getAirports() {
+    return airports;
+}
+
+unordered_map<string, Airline> AirManager::getAirlines() {
+    return airlines;
+}
+
 void AirManager::setAirlines(unordered_map<std::string, Airline> airlines) {
     this->airlines = airlines;
 }
@@ -42,8 +50,8 @@ void AirManager::readFlightsFile(string fname) {
             getline(inputString, destination, ',');
             getline(inputString, airline, ',');
             Flight f1 = Flight(destination, airline);
-            Airport airport = airports.at(origin);
-            airport.addFlight(f1);
+            auto it = airports.find(origin);
+            it->second.addFlight(f1);
         }
     } else {
         cout << "Could not open flights file" << endl;
@@ -165,14 +173,49 @@ int AirManager::getNumAirlinesByCountry(string country) {
 }
 
 int AirManager::getNumFlightsByCountry(string country) {
-    set<string> s;
+    vector<string> s;
     auto v = getCountryAirport(country);
     for (auto x: v){
-        s.insert(x.getCode());
+        for(auto f: x.getFlights()){
+            s.push_back(f.getDestination());
+        }
     }
     return s.size();
 }
 
+vector<Airport> AirManager::getAirlineDestinations(string airlinecode) {
+     vector<Airport> v;
+     set<string> s;
+     for (auto x: airports){
+         for (auto f : x.second.getFlights()){
+             if (f.getAirline() == airlinecode) s.insert(x.second.getCode());
+         }
+     }
+     for (auto x: s){
+         Airport a = getAirportInformation(x);
+         v.push_back(a);
+     }
+     return v;
+}
+
+int AirManager::getNumCountriesByAirline(string airline) {
+    set<string> s;
+    auto v = getAirlineDestinations(airline);
+    for (auto x: v){
+        s.insert(x.getCountry());
+    }
+    return s.size();
+}
+
+int AirManager::getNumFlightsByAirline(string airline) {
+    vector<Flight> v;
+    for (auto x: airports){
+        for (auto f : x.second.getFlights()){
+            if (f.getAirline() == airline) v.push_back(f);
+        }
+    }
+    return v.size();
+}
 
 float haversine(float p1long, float p1lat, float p2long, float p2lat){
     return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));

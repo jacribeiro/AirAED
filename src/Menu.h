@@ -73,6 +73,9 @@ public:
      */
     void showCountryStatistics(AirManager manager, string country);
 
+    void showAirlineStatistics(AirManager &manager, string airline);
+
+    void showGlobalStatistics(AirManager manager);
 };
 
 
