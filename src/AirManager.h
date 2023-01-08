@@ -7,21 +7,20 @@
 
 
 #include <unordered_map>
-#include "FileReader.h"
 #include "Airport.h"
 
 class AirManager {
     unordered_map<string, Airport> airports;
     unordered_map<string, Airline> airlines;
     unordered_map<string, vector<string>> cities;
-    FileReader reader;
 
 public:
     /**
      * Creates a new AirManager object
      * @param r A FileReader object, to be used by the AirManager
      */
-    AirManager(FileReader r);
+    explicit AirManager();
+
     /**
      * Returns the airports that will be in the system
      * @return Unordered_map of airports in the system
@@ -32,30 +31,18 @@ public:
      * @return Unordered_map of airlines in the system
      */
     unordered_map<string, Airline> getAirlines();
-    /**
-     * Sets the airlines that will be in the system
-     * @param airlines Unordered_map of airlines to be added to the system
-     */
-    void setAirlines(unordered_map<string, Airline> airlines);
 
     /**
-     * Sets the airports that will be in the system
-     * @param airports Unordered_map of airports to be added to the system
+     * Reads the file containing the airlines, adding them to the system
+     * @param fname The name of the file to be read
      */
-    void setAirports(unordered_map<string, Airport> airports);
-
-    /**
-     * Adds a Flight to the system
-     * @param origin IATA code of the airport of origin
-     * @param flight Flight object to be added
-     */
-    void addFlight(string origin, const Flight& flight);
+    void readAirlinesFile(string fname);
 
     /**
      * Reads the file containing the airports, adding them to the system
      * @param fname The name of the file to be read
      */
-    void readAirportFile(string fname);
+    void readAirportsFile(string fname);
 
     /**
      * Reads the file containing the flights, adding them to the system
@@ -64,6 +51,7 @@ public:
     void readFlightsFile(string fname);
 
     void bfs(string airport);
+
     void bfs_path(string ori, string dest);
 
     vector<string> bestRouteDistribution(string ori, string dest, pair<int, int> option);

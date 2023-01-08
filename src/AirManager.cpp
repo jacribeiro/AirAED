@@ -11,10 +11,9 @@
 #include <set>
 #include "AirManager.h"
 
-AirManager::AirManager(FileReader r) {
-    this->reader = r;
-    setAirlines(r.readAirlinesFile("CSV/airlines.csv"));
-    readAirportFile("CSV/airports.csv");
+AirManager::AirManager() {
+    readAirlinesFile("CSV/airlines.csv");
+    readAirportsFile("CSV/airports.csv");
     readFlightsFile("CSV/flights.csv");
 }
 
@@ -38,20 +37,28 @@ unordered_map<string, Airline> AirManager::getAirlines() {
     return airlines;
 }
 
-void AirManager::setAirlines(unordered_map<std::string, Airline> airlines) {
-    this->airlines = airlines;
+void AirManager::readAirlinesFile(string fname) {
+    string line;
+    ifstream file(fname);
+    if (file.is_open()) {
+        // Read the first line and discard
+        getline(file, line);
+        string code, name, nickname, country;
+        while (getline(file, line)) {
+            stringstream inputString(line);
+            getline(inputString, code, ',');
+            getline(inputString, name, ',');
+            getline(inputString, nickname, ',');
+            getline(inputString, country, ',');
+            Airline a1 = Airline(code, name, nickname, country);
+            airlines.insert({code, a1});
+        }
+    } else {
+        cout << "Could not open airlines file" << endl;
+    }
 }
 
-void AirManager::setAirports(unordered_map<std::string, Airport> airports) {
-    this->airports = airports;
-}
-
-void AirManager::addFlight(string origin, const Flight& flight) {
-    Airport airport = airports.at(origin);
-    airport.addFlight(flight);
-}
-
-void AirManager::readAirportFile(string fname) {
+void AirManager::readAirportsFile(string fname) {
     string line;
     ifstream file(fname);
     if (file.is_open()) {
