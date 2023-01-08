@@ -29,10 +29,11 @@ public:
     /**
      * Prints The best route available between two places
      * @param manager Reference to a AirManager object that will perform the operation
-     * @param departure string representing place of departure
-     * @param destination string representing desired destination
+     * @param ori string representing place of departure
+     * @param dest string representing desired destination
+     * @param option pair of integers indicating type of place in ori and dest (1 = airport code, 2 = city, 3 = coordinates)
      */
-    void showBestRoute(AirManager &manager, string departure, string destination);
+    void showBestRoute(AirManager &manager, string ori, string dest, pair<int, int> option);
 
     /**
      * Prints all the available Information about an Airport

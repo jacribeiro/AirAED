@@ -42,7 +42,7 @@ void Airport::unvisit() {
     this->visited = false;
 }
 
-bool Airport::getvisited() {
+bool Airport::getVisited() {
     return this->visited;
 }
 
@@ -56,6 +56,14 @@ int Airport::getDistance() {
 
 void Airport::setDistance(int d) {
     this->distance = d;
+}
+
+string Airport::getPrevious() {
+    return this->previous;
+}
+
+void Airport::setPrevious(string previous) {
+    this->previous = previous;
 }
 
 void Airport::addFlight(const Flight &flight) {

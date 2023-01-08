@@ -13,7 +13,7 @@
 AirManager::AirManager(FileReader r) {
     this->reader = r;
     setAirlines(r.readAirlinesFile("CSV/airlines.csv"));
-    setAirports(r.readAirportFile("CSV/airports.csv"));
+    readAirportFile("CSV/airports.csv");
     readFlightsFile("CSV/flights.csv");
 }
 
@@ -38,6 +38,38 @@ void AirManager::addFlight(string origin, const Flight& flight) {
     airport.addFlight(flight);
 }
 
+void AirManager::readAirportFile(string fname) {
+    string line;
+    ifstream file(fname);
+    if (file.is_open()) {
+        // Read the first line and discard it
+        getline(file, line);
+        string code, name, city, country, temp;
+        float lat, lon;
+        while (getline(file, line)) {
+            stringstream inputString(line);
+            getline(inputString, code, ',');
+            getline(inputString, name, ',');
+            getline(inputString, city, ',');
+            getline(inputString, country, ',');
+            getline(inputString, temp, ',');
+            lat = stof(temp);
+            getline(inputString, temp, ',');
+            lon = stof(temp);
+            Airport a1 = Airport(code, name, city, country, lat, lon);
+            airports.insert({code, a1});
+            if (cities.find(city) == cities.end()) {
+                vector<string> a1 = {code};
+                cities.insert({city, a1});
+            } else {
+                cities.at(city).push_back(code);
+            }
+        }
+    } else {
+        cout << "Could not open airports file" << endl;
+    }
+}
+
 void AirManager::readFlightsFile(string fname) {
     string line;
     ifstream file(fname);
@@ -58,32 +90,67 @@ void AirManager::readFlightsFile(string fname) {
     }
 }
 
-void AirManager::bfs(Airport airport) {
+void AirManager::bfs(string origin) {
     for (auto a : airports){
         a.second.unvisit();
     }
-    queue<Airport> q;
-    q.push(airport);
-    airport.visit();
-    airport.setDistance(0);
+    queue<string> q;
+    q.push(origin);
+    airports.at(origin).visit();
+    airports.at(origin).setDistance(0);
 
     while(!q.empty()){
         auto u = q.front();
         q.pop();
-        for(auto f : u.getFlights()){
-            Airport a = airports.at(f.getDestination());
-            if(!a.getvisited()){
-                q.push(a);
-                a.visit();
-                a.setDistance(airport.getDistance() + 1);
+        for(auto f : airports.at(u).getFlights()){
+            string dest = f.getDestination();
+            if(!airports.at(dest).getVisited()){
+                q.push(airports.at(dest).getCode());
+                airports.at(dest).visit();
+                airports.at(dest).setDistance(airports.at(u).getDistance() + 1);
             }
         }
     }
 }
 
-int AirManager::bestRouteAirports(string origin, string destination) {
-    bfs(airports.at(origin));
-    return airports.at(destination).getDistance();
+void AirManager::bfs_path(string ori, string dest) {
+    for (auto a: airports) {
+        a.second.unvisit();
+        a.second.setPrevious("");
+    }
+    queue<string> q;
+    q.push(ori);
+    airports.at(ori).visit();
+    while (!q.empty()) {
+        auto u = q.front(); q.pop();
+        for (auto f: airports.at(u).getFlights()) {
+            string d = f.getDestination();
+            if (!airports.at(d).getVisited()) {
+                q.push(airports.at(d).getCode());
+                airports.at(d).visit();
+                airports.at(d).setDistance(airports.at(u).getDistance() + 1);
+                airports.at(d).setPrevious(airports.at(u).getCode());
+                if (d == dest) return;
+            }
+        }
+    }
+}
+
+vector<string> AirManager::bestRouteDistribution(string ori, string dest, pair<int, int> option) {
+}
+
+vector<string> AirManager::bestRouteAirports(string origin, string destination) {
+    vector<string> route;
+    bfs_path(origin, destination);
+    while (destination != "") {
+        route.insert(route.begin(), destination);
+        destination = airports.at(destination).getPrevious();
+    }
+    return route;
+}
+
+vector<string> AirManager::getAirportsInCity(string city) {
+    return cities.at(city);
 }
 
 

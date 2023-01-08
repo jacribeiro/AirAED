@@ -13,6 +13,7 @@
 class AirManager {
     unordered_map<string, Airport> airports;
     unordered_map<string, Airline> airlines;
+    unordered_map<string, vector<string>> cities;
     FileReader reader;
 
 public:
@@ -51,14 +52,30 @@ public:
     void addFlight(string origin, const Flight& flight);
 
     /**
-     * Reads the file containing the flights, and adds them to the system
+     * Reads the file containing the airports, adding them to the system
+     * @param fname The name of the file to be read
+     */
+    void readAirportFile(string fname);
+
+    /**
+     * Reads the file containing the flights, adding them to the system
      * @param fname Name of the file containing the flights
      */
     void readFlightsFile(string fname);
-    void bfs(Airport airport);
 
+    void bfs(string airport);
+    void bfs_path(string ori, string dest);
 
-    int bestRouteAirports(string origin, string destination);
+    vector<string> bestRouteDistribution(string ori, string dest, pair<int, int> option);
+
+    vector<string> bestRouteAirports(string origin, string destination);
+
+    /**
+     * Returns vector of airport codes of airports located in the given city
+     * @param city City whose airports we want to get
+     * @return Vector of airport codes of airports located in the given city
+     */
+    vector<string> getAirportsInCity(string city);
 
     /**
      * It creates a vector with all the Airports of a country

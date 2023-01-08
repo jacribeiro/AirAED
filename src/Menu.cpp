@@ -34,6 +34,7 @@ void Menu::show() {
         cin >> n1;
         string name1;
         string name2;
+        int opt1 = 0, opt2 = 0;
         switch (n1) {
             case 1: {
                 cout << "***We will need you to provide the Following Information:***\n\n";
@@ -48,16 +49,19 @@ void Menu::show() {
                     case ('a'): {
                         cout << "***Insert Airport Code (eg.: JFK)***\n";
                         cin >> name1;
+                        opt1 = 1;
                         break;
                     }
                     case ('b'): {
                         cout << "***Insert City Name (eg.: Paris)***\n";
                         cin >> name1;
+                        opt1 = 2;
                         break;
                     }
                     case ('c'): {
                         cout << "***Insert the specific Coordinates, separated by a comma (eg.: 47.833,02.902)***\n";
                         cin >> name1;
+                        opt1 = 3;
                         break;
                     }
                 }
@@ -73,20 +77,23 @@ void Menu::show() {
                     case ('a'): {
                         cout << "***Insert Airport Code (eg.: JFK)***\n";
                         cin >> name2;
+                        opt2 = 1;
                         break;
                     }
                     case ('b'): {
                         cout << "***Insert City Name (eg.: Paris)***\n";
                         cin >> name2;
+                        opt2 = 2;
                         break;
                     }
                     case ('c'): {
                         cout << "***Insert the specific Coordinates, separated by a comma (eg.: 47.833,02.902)***\n";
                         cin >> name2;
+                        opt2 = 3;
                         break;
                     }
                 }
-                showBestRoute(manager, name1, name2);
+                showBestRoute(manager, name1, name2, {opt1, opt2});
                 break;
             }
             case 2: {
@@ -181,8 +188,8 @@ void Menu::showAirportInformation(AirManager &manager, string airport) {
     cout<<"===============================================================================\n";
 
 }
-void Menu::showBestRoute(AirManager &manager, std::string departure, std::string destination) {
-
+void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int, int> option) {
+    manager.bestRouteDistribution(ori, dest, option);
 }
 
 void Menu::showCountryAirlines(AirManager &manager, string country){

@@ -26,6 +26,7 @@ class Airport {
     vector<Flight> flights;
     bool visited = false;
     int distance = 0;
+    string previous;
 
 public:
     /**
@@ -89,7 +90,7 @@ public:
      * Returns the visited status of the airport
      * @return
      */
-    bool getvisited();
+    bool getVisited();
 
     /**
      * Returns the vector of Flights that depart from this Airport
@@ -108,6 +109,18 @@ public:
      * @param d The new distance to be set to the airport
      */
     void setDistance(int d);
+
+    /**
+     * Returns the code of the 'previous' airport, during a BFS
+     * @return Code of the 'previous' airport, during a BFS
+     */
+    string getPrevious();
+
+    /**
+     * Sets the 'previous' airport
+     * @param parent Airport code of the 'previous' airport
+     */
+    void setPrevious(string previous);
 
     /**
      * Adds a Flight to the Airport
