@@ -450,7 +450,7 @@ int AirManager::getGlobalNumFlights() {
 
 string AirManager::nearestAirport(float lat, float lon) {
     string nearest;
-    float minDistance = MAXFLOAT;
+    float minDistance = numeric_limits<float>::max();
     for (auto a: this->airports) {
         float distance = haversine(lon, lat, a.second.getLongitude(), a.second.getLatitude());
         if (distance < minDistance) {
