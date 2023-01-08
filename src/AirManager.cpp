@@ -460,3 +460,14 @@ string AirManager::nearestAirport(float lat, float lon) {
     }
     return nearest;
 }
+
+vector<Airport> AirManager::getDestinationByNumFlights(string airport, int n) {
+    vector<Airport> v;
+    bfs(airport);
+    for (auto a : airports){
+        if (a.second.getVisited() && a.second.getDistance()<=n && a.second.getDistance()!=0){
+            v.push_back(a.second);
+        }
+    }
+    return v;
+}
