@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <limits>
 #include <set>
 #include "AirManager.h"
 
@@ -25,7 +26,8 @@ pair<float, float> sToCoord(string coord) {
 }
 
 float haversine(float p1long, float p1lat, float p2long, float p2lat){
-    return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
+
+    return 2.0 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
 }
 
 unordered_map<string, Airport> AirManager::getAirports() {
@@ -223,6 +225,37 @@ vector<string> AirManager::bestRoute4(string ori, string dest) {
         }
         it++;
     }
+}
+
+vector<string> AirManager::bestRoute7(string origin_coords, string dest) {
+    pair<float, float> coords = sToCoord(origin_coords);
+
+    string ap = nearestAirport(coords.first, coords.second);
+
+    vector<string> route = bestRoute(ap, dest);
+
+    return route;
+}
+
+vector<string> AirManager::bestRoute8(string origin_coords, string city) {
+    pair<float, float> coords = sToCoord(origin_coords);
+
+    string ap = nearestAirport(coords.first, coords.second);
+
+    vector<string> route = bestRoute2(ap, city);
+
+    return route;
+}
+
+vector<string> AirManager::bestRoute9(string origin, string loc) {
+    pair<float, float> coords_partida = sToCoord(origin);
+    pair<float, float> coords_destino = sToCoord(loc);
+
+    string ap_p = nearestAirport(coords_partida.first, coords_partida.second);
+    string ap_d = nearestAirport(coords_destino.first, coords_destino.second);
+
+    vector<string> route = bestRoute(ap_p, ap_d);
+    return route;
 }
 
 vector<string> AirManager::getAirportsInCity(string city) {
