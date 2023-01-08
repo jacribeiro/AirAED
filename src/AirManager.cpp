@@ -430,14 +430,6 @@ int AirManager::getNumFlightsByAirline(string airline) {
     return v.size();
 }
 
-int AirManager::getGlobalNumCountries() {
-    set<string> s;
-    for (auto x : airports){
-        s.insert(x.second.getCountry());
-    }
-    return s.size();
-}
-
 int AirManager::getGlobalNumFlights() {
     int cont = 0;
     for (auto a: airports){
@@ -465,7 +457,7 @@ vector<Airport> AirManager::getDestinationByNumFlights(string airport, int n) {
     vector<Airport> v;
     bfs(airport);
     for (auto a : airports){
-        if (a.second.getVisited() && a.second.getDistance()<=n && a.second.getDistance()!=0){
+        if (a.second.getVisited() && a.second.getDistance()<=n && a.second.getDistance()>0){
             v.push_back(a.second);
         }
     }
