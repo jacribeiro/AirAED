@@ -68,9 +68,45 @@ public:
 
     vector<string> bestRouteDistribution(string ori, string dest, pair<int, int> option);
 
+    /**
+     * Calculates, through BFS, the shortest path between two given airports
+     * @param origin Code of the origin airport
+     * @param destination Code of the destination airport
+     * @return A vector containing the best route to take, starting from the origin airport, and ending in the destination
+     */
     vector<string> bestRoute(string origin, string destination);
 
+    /**
+     * Calculates, through BFS, the shortest path between an airport and a given city
+     * @param ori Code of the origin airport
+     * @param city City of the destination
+     * @return A vector containing the best route to take, starting from the origin airport, and ending in the destination
+     */
     vector<string> bestRoute2(string ori, string city);
+
+    /**
+     * Calculates, through BFS, the shortest path between an airport and a given location
+     * @param ori Code of the origin airport
+     * @param loc String of coordinates (in the format "lat,lon") for the destination
+     * @return A vector containing the best route to take, starting from the origin airport, and ending in the destination
+     */
+    vector<string> bestRoute3(string ori, string loc);
+
+    /**
+     * Calculates, through BFS, the shortest path between a city and a given airport
+     * @param ori City of origin
+     * @param dest Code of the destination airport
+     * @return A vector containing the best route to take, starting from the origin city, and ending in the destination
+     */
+    vector<string> bestRoute4(string ori, string dest);
+
+    /**
+     * Calculates, through BFS, the shortest path between two cities
+     * @param ori City of origin
+     * @param dest City of destination
+     * @return A vector containing the best route to take, starting from the origin city, and ending in the destination
+     */
+    vector<string> bestRoute5(string ori, string dest);
 
     /**
      * Returns vector of airport codes of airports located in the given city

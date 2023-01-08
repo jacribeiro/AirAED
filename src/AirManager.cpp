@@ -194,6 +194,10 @@ vector<string> AirManager::bestRoute2(string ori, string city) {
     return route;
 }
 
+vector<string> AirManager::bestRoute3(string ori, string loc) {
+
+}
+
 vector<string> AirManager::getAirportsInCity(string city) {
     return cities.at(city);
 }
