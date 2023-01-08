@@ -41,89 +41,89 @@ public:
     Airport(string c, string n, string ct, string cy, float lat, float lon);
 
     /**
-     * Returns the IATA code for the airport
+     * Returns the IATA code for the airport (Complexity: O(1))
      * @return the IATA code for the airport
      */
     string getCode() const;
 
     /**
-     * Returns the official name of the airport
+     * Returns the official name of the airport (Complexity: O(1))
      * @return the official name of the airport
      */
     string getName() const;
 
     /**
-     * Returns the city where the airport is located
+     * Returns the city where the airport is located (Complexity: O(1))
      * @return the city where the airport is located
      */
     string getCity() const;
 
     /**
-     * Returns the country where the airport is located
+     * Returns the country where the airport is located (Complexity: O(1))
      * @return the country where the airport is located
      */
     string getCountry() const;
 
     /**
-     * Returns the latitude coordinate for the airport
+     * Returns the latitude coordinate for the airport (Complexity: O(1))
      * @return the latitude coordinate for the airport
      */
     float getLatitude() const;
 
     /**
-     * Returns the longitude coordinate for the airport
+     * Returns the longitude coordinate for the airport (Complexity: O(1))
      * @return the longitude coordinate for the airport
      */
     float getLongitude() const;
 
     /**
-     * Marks the Airport as visited
+     * Marks the Airport as visited (Complexity: O(1))
      */
     void visit();
 
     /**
-     * Marks the airport as unvisited
+     * Marks the airport as unvisited (Complexity: O(1))
      */
     void unvisit();
 
     /**
-     * Returns the visited status of the airport
+     * Returns the visited status of the airport (Complexity: O(1))
      * @return
      */
     bool getVisited();
 
     /**
-     * Returns the vector of Flights that depart from this Airport
+     * Returns the vector of Flights that depart from this Airport (Complexity: O(1))
      * @return Vector of Flights that depart from this Airport
      */
     vector<Flight> getFlights();
 
     /**
-     * Returns the distance this airport is after the most recent BFS
+     * Returns the distance this airport is after the most recent BFS (Complexity: O(1))
      * @return Distance this airport is after the most recent BFS
      */
     int getDistance();
 
     /**
-     * Sets the distance of the airport
+     * Sets the distance of the airport (Complexity: O(1))
      * @param d The new distance to be set to the airport
      */
     void setDistance(int d);
 
     /**
-     * Returns the code of the 'previous' airport, during a BFS
+     * Returns the code of the 'previous' airport, during a BFS (Complexity: O(1))
      * @return Code of the 'previous' airport, during a BFS
      */
     string getPrevious();
 
     /**
-     * Sets the 'previous' airport
+     * Sets the 'previous' airport (Complexity: O(1))
      * @param parent Airport code of the 'previous' airport
      */
     void setPrevious(string previous);
 
     /**
-     * Adds a Flight to the Airport
+     * Adds a Flight to the Airport (Complexity: O(1))
      * @param flight A Flight object originating from this airport
      */
     void addFlight(const Flight& flight);

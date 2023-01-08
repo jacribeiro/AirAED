@@ -23,13 +23,14 @@ void Menu::show() {
         cout << "\nHello, " << name << "!\nWhat would do you like to do today? (eg.: 4)\n";
         cout << "1. Check the Best Route Available.\n";
         cout << "2. Check Airport's Flight Information.\n";
-        cout << "3. Check Airport Statistics.\n";
-        cout << "4. Check Countries Flight Information.\n";
-        cout << "5. Check Country Statistics.\n";
-        cout << "6. Check Airline Flight Information.\n";
-        cout << "7. Check Airline Statistics.\n";
-        cout << "8. Check Global Statistics.\n";
-        cout << "9. Quit.\n";
+        cout << "3. Check Airports Destinations by Number of Flights\n";
+        cout << "4. Check Airport Statistics.\n";
+        cout << "5. Check Countries Flight Information.\n";
+        cout << "6. Check Country Statistics.\n";
+        cout << "7. Check Airline Flight Information.\n";
+        cout << "8. Check Airline Statistics.\n";
+        cout << "9. Check Global Statistics.\n";
+        cout << "10. Quit.\n";
         int n1;
         cin >> n1;
         string name1;
@@ -39,7 +40,7 @@ void Menu::show() {
             case 1: {
                 cout << "***We will need you to provide the Following Information:***\n\n";
                 cout << "-> Your Place of Departure" << "\n";
-                cout << "(Choose the type of data you would like to insert)" << "\n";
+                cout << "(Choose the type of data you would like to insert) (ex.: a)" << "\n";
                 cout << "a) Airport Code\n";
                 cout << "b) City Name\n";
                 cout << "c) Specific Coordinates (latitude and longitude)\n";
@@ -47,13 +48,13 @@ void Menu::show() {
                 cin >> l1;
                 switch (l1) {
                     case ('a'): {
-                        cout << "***Insert Airport Code (eg.: JFK)***\n";
+                        cout << "***Insert Airport Code (eg.: LIS)***\n";
                         cin >> name1;
                         opt1 = 1;
                         break;
                     }
                     case ('b'): {
-                        cout << "***Insert City Name (eg.: Paris)***\n";
+                        cout << "***Insert City Name (eg.: Tokyo)***\n";
                         cin >> name1;
                         opt1 = 2;
                         break;
@@ -67,7 +68,7 @@ void Menu::show() {
                 }
 
                 cout << "-> Your Desired Destination" << "\n";
-                cout << "(Choose the type of data you would like to insert)" << "\n";
+                cout << "(Choose the type of data you would like to insert)(eg.: a )" << "\n";
                 cout << "a) Airport Code\n";
                 cout << "b) City Name\n";
                 cout << "c) Specific Coordinates (latitude and longitude)\n";
@@ -107,15 +108,26 @@ void Menu::show() {
                 cout << "***We will need you to provide the Following Information:***\n\n";
                 cout << "***Insert Airport Code (eg.: JFK)***\n";
                 cin >> name1;
+                cout << "***Insert Number of Flights (eg.: 2)***\n";
+                int n;
+                cin >> n;
+                showDestinationByNumFlights(manager, name1, n);
+                break;
+            }
+
+            case 4: {
+                cout << "***We will need you to provide the Following Information:***\n\n";
+                cout << "***Insert Airport Code (eg.: JFK)***\n";
+                cin >> name1;
                 showAirportStatistics(manager, name1);
                 break;
             }
-            case 4: {
+            case 5: {
                 cout << "***We will need you to provide the Following Information:***\n\n";
                 cout << "***Insert the name of the Country (eg.: France)***\n";
                 cin >> name1;
                 cout << "***Choose the type of Information you're seeking (eg.: a)***\n";
-                cout << "a) List of Airports operating in the Country\n";
+                cout << "a) List of National Airports\n";
                 cout << "b) List of the National Airlines\n";
                 char l3;
                 cin >> l3;
@@ -131,32 +143,32 @@ void Menu::show() {
                 }
                 break;
             }
-            case 5:{
+            case 6:{
                 cout << "***We will need you to provide the Following Information:***\n\n";
                 cout << "***Insert the name of the Country (eg.: France)***\n";
                 cin >> name1;
                 showCountryStatistics(manager, name1);
                 break;
             }
-            case 6: {
+            case 7: {
                     cout << "***We will need you to provide the Following Information:***\n\n";
                     cout << "***Insert the code of the Airline (eg.: TAP)***\n";
                     cin >> name1;
                     showAirlineInformation(manager, name1);
                     break;
             }
-            case 7: {
+            case 8: {
                 cout << "***We will need you to provide the Following Information:***\n\n";
                 cout << "***Insert the code of the Airline (eg.: TAP)***\n";
                 cin >> name1;
                 showAirlineStatistics(manager, name1);
                 break;
             }
-            case 8: {
+            case 9: {
                 showGlobalStatistics(manager);
                 break;
             }
-            case 9: {
+            case 10: {
                     flag = false;
                     cout << "***You have successfully exited your Air Manager!***";
             }
@@ -174,19 +186,33 @@ void Menu::show() {
 void Menu::showAirportInformation(AirManager &manager, string airport) {
     Airport v1 = manager.getAirportInformation(airport);
     vector<Flight> v2 = manager.getAirportDestinations(airport);
-    cout <<"From the "<<v1.getName()<< " Airport ("<<v1.getCountry()<<") "<< "you can fly from "<<v1.getCity()<<" to these DESTINATIONS:\n";
+    cout <<"From the "<<v1.getName()<< " Airport ("<<v1.getCountry()<<") "<< "you can fly from "<<v1.getCity()<<" directly to these DESTINATIONS:\n";
     cout<<"===============================================================================\n";
-    cout << left << setw(42) << "City (Country)" << left << setw(22) << "Airline"<<endl;
+    cout << left << setw(42) << "City (Country)" << left << setw(42) << "Airline"<<endl;
     cout<<"===============================================================================\n";
     for (auto x : v2){
         Airport a1 = manager.getAirportInformation(x.getDestination());
         Airline a2 = manager.getAirlineInformation(x.getAirline());
         cout << left << setw(42) << a1.getCity() + " ("+a1.getCountry()+")"
-             << left << setw(32) << a2.getName()
+             << left << setw(42) << a2.getName()
              << endl;
     }
     cout<<"===============================================================================\n";
 
+}
+void Menu::showDestinationByNumFlights(AirManager manager, string airport, int n) {
+    Airport v1 = manager.getAirportInformation(airport);
+    cout <<"From the "<<v1.getName()<< " Airport ("<<v1.getCountry()<<") "<< "you can fly from "<<v1.getCity()<<" directly to these DESTINATIONS:\n";
+    cout<<"===============================================================================\n";
+    cout << left << setw(22) << "Country" << left << setw(22) << "City"<<endl;
+    cout<<"===============================================================================\n";
+    vector<Airport> v2 = manager.getDestinationByNumFlights(airport, n);
+    for (auto x : v2){
+        cout << left << setw(22) << x.getCountry()
+             << left << setw(22) << x.getCity()
+             << endl;
+    }
+    cout<<"===============================================================================\n";
 }
 
 void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int, int> option) {
@@ -201,6 +227,7 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
                 }
                 case 2: {
                     cout << "The best way to get from the " << ori << " airport to the city of " << dest << " is:\n";
@@ -208,6 +235,7 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
                 }
                 case 3: {
                     cout << "The best way to get from the " << ori << " airport to [" << dest << "] is:\n";
@@ -215,8 +243,10 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
                 }
             }
+            break;
         }
 
         case 2: {
@@ -227,6 +257,7 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
                 }
                 case 2: {
                     cout << "The best way to get from the city of " << ori << " to the city of " << dest << " is;\n";
@@ -234,6 +265,8 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
+
                 }
                 case 3: {
                     cout << "The best way to get from the city of " << ori << " to [" << dest << "] is:\n";
@@ -241,8 +274,10 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
                 }
             }
+            break;
         }
 
         case 3: {
@@ -253,6 +288,7 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
                 }
                 case 2: {
                     cout << "The best way to get from [" << ori << "] to the city of " << dest << " is:\n";
@@ -260,6 +296,7 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
                 }
                 case 3: {
                     cout << "The best way to get from [" << ori << "] to [" << dest << "] is:\n";
@@ -267,8 +304,10 @@ void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int,
                         cout << ">" << s << " airport\n";
                     }
                     cout << "==========================================================================\n";
+                    break;
                 }
             }
+            break;
         }
     }
 }
@@ -372,11 +411,12 @@ void Menu::showGlobalStatistics(AirManager manager) {
     cout<<"==========================================================================\n";
     cout<<"Number of Flights ---> "<<n_flights<<endl;
     cout<<"Number of Airports ---> "<<n_airports<<endl;
-    //cout<<"Number of Countries ---> "<<n_countries<<endl;
     cout<<"Number of Airlines---> "<<n_airlines<<endl;
     cout<<"==========================================================================\n";
 
 }
+
+
 
 
 
