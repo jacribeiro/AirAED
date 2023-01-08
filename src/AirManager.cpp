@@ -24,9 +24,17 @@ pair<float, float> sToCoord(string coord) {
     return {stof(lat), stof(lon)};
 }
 
-float haversine(float p1long, float p1lat, float p2long, float p2lat){
-
-    return 2.0 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
+double haversine(float p1long, float p1lat, float p2long, float p2lat){
+    float phi1 = p1lat * M_PI / 180;
+    float phi2 = p2lat * M_PI / 180;
+    float lambda1 = p1long * M_PI / 180;
+    float lambda2 = p2long * M_PI / 180;
+    float deltaPhi = phi2 - phi1;
+    float deltaLambda = lambda2 - lambda1;
+    double a = pow(sin(deltaPhi / 2.0), 2) + cos(phi1) * cos(phi2) * pow(sin(deltaLambda / 2), 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    double km = 6371 * c;
+    return km;
 }
 
 unordered_map<string, Airport> AirManager::getAirports() {
@@ -451,7 +459,7 @@ string AirManager::nearestAirport(float lat, float lon) {
     string nearest;
     float minDistance = numeric_limits<float>::max();
     for (auto a: this->airports) {
-        float distance = haversine(lon, lat, a.second.getLongitude(), a.second.getLatitude());
+        double distance = haversine(lon, lat, a.second.getLongitude(), a.second.getLatitude());
         if (distance < minDistance) {
             minDistance = distance;
             nearest = a.second.getCode();
