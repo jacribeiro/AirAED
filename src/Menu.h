@@ -77,6 +77,8 @@ public:
     void showAirlineStatistics(AirManager &manager, string airline);
 
     void showGlobalStatistics(AirManager manager);
+
+    void showDestinationByNumFlights(AirManager manager, string airport, int n);
 };
 
 

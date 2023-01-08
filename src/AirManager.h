@@ -250,6 +250,8 @@ public:
      * @return Code of the airport nearest to the given coordinates
      */
     string nearestAirport(float lat, float lon);
+
+    vector<Airport> getDestinationByNumFlights(string airport, int n);
 };
 
 
