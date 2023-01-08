@@ -137,14 +137,59 @@ void AirManager::bfs_path(string ori, string dest) {
 }
 
 vector<string> AirManager::bestRouteDistribution(string ori, string dest, pair<int, int> option) {
+    switch (option.first) {
+        case 1:
+            switch (option.second) {
+                case 1:
+                    return bestRoute(ori, dest);
+                case 2:
+                    return bestRoute2(ori, dest);
+                case 3:
+                    return bestRoute3(ori, dest);
+            }
+        case 2:
+            switch (option.second) {
+                case 1:
+                    return bestRoute4(ori, dest);
+                case 2:
+                    return bestRoute5(ori, dest);
+                case 3:
+                    return bestRoute6(ori, dest);
+            }
+        case 3:
+            switch (option.second) {
+                case 1:
+                    return bestRoute7(ori, dest);
+                case 2:
+                    return bestRoute8(ori, dest);
+                case 3:
+                    return bestRoute9(ori, dest);
+            }
+
+    }
 }
 
-vector<string> AirManager::bestRouteAirports(string origin, string destination) {
+vector<string> AirManager::bestRoute(string origin, string destination) {
     vector<string> route;
     bfs_path(origin, destination);
     while (destination != "") {
         route.insert(route.begin(), destination);
         destination = airports.at(destination).getPrevious();
+    }
+    return route;
+}
+
+vector<string> AirManager::bestRoute2(string ori, string city) {
+    vector<string> route, aux;
+    size_t bestSize = INT16_MAX;
+    auto it = cities.at(city).begin();
+    while (it != cities.at(city).end()) {
+        aux = bestRoute(ori, (*it));
+        if (aux.size() < bestSize) {
+            route = aux;
+            bestSize = route.size();
+        }
+        it++;
     }
     return route;
 }

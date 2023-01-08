@@ -68,7 +68,9 @@ public:
 
     vector<string> bestRouteDistribution(string ori, string dest, pair<int, int> option);
 
-    vector<string> bestRouteAirports(string origin, string destination);
+    vector<string> bestRoute(string origin, string destination);
+
+    vector<string> bestRoute2(string ori, string city);
 
     /**
      * Returns vector of airport codes of airports located in the given city
