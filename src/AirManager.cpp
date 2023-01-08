@@ -225,6 +225,27 @@ vector<string> AirManager::bestRoute4(string ori, string dest) {
         }
         it++;
     }
+    return route;
+}
+
+vector<string> AirManager::bestRoute5(string ori, string dest) {
+    vector<string> route, aux;
+    size_t bestSize = INT16_MAX;
+    auto itOri = cities.at(ori).begin();
+    auto itDest = cities.at(dest).begin();
+    while (itOri != cities.at(ori).end()) {
+        while (itDest != cities.at(dest).end()) {
+            aux = bestRoute((*itOri), (*itDest));
+            if (aux.size() < bestSize) {
+                route = aux;
+                bestSize = route.size();
+            }
+            itDest++;
+        }
+        itDest = cities.at(dest).begin();
+        itOri++;
+    }
+    return route;
 }
 
 vector<string> AirManager::bestRoute6(string ori, string dest) {
@@ -241,31 +262,26 @@ vector<string> AirManager::bestRoute6(string ori, string dest) {
         }
         it++;
     }
+    return route;
 }
 
-vector<string> AirManager::bestRoute7(string origin_coords, string dest) {
-    pair<float, float> coords = sToCoord(origin_coords);
-
+vector<string> AirManager::bestRoute7(string ori, string dest) {
+    pair<float, float> coords = sToCoord(ori);
     string ap = nearestAirport(coords.first, coords.second);
-
     vector<string> route = bestRoute(ap, dest);
-
     return route;
 }
 
-vector<string> AirManager::bestRoute8(string origin_coords, string city) {
-    pair<float, float> coords = sToCoord(origin_coords);
-
+vector<string> AirManager::bestRoute8(string ori, string dest) {
+    pair<float, float> coords = sToCoord(ori);
     string ap = nearestAirport(coords.first, coords.second);
-
-    vector<string> route = bestRoute2(ap, city);
-
+    vector<string> route = bestRoute2(ap, dest);
     return route;
 }
 
-vector<string> AirManager::bestRoute9(string origin, string loc) {
-    pair<float, float> coords_partida = sToCoord(origin);
-    pair<float, float> coords_destino = sToCoord(loc);
+vector<string> AirManager::bestRoute9(string ori, string dest) {
+    pair<float, float> coords_partida = sToCoord(ori);
+    pair<float, float> coords_destino = sToCoord(dest);
 
     string ap_p = nearestAirport(coords_partida.first, coords_partida.second);
     string ap_d = nearestAirport(coords_destino.first, coords_destino.second);
