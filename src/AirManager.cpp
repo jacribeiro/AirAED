@@ -310,3 +310,18 @@ int AirManager::getGlobalNumFlights() {
 float haversine(float p1long, float p1lat, float p2long, float p2lat){
     return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
 }
+
+string AirManager::nearestAirport(float lat, float lon) {
+    string nearest;
+    float minDistance = MAXFLOAT;
+    for (auto a: this->airports) {
+        float distance = haversine(lon, lat, a.second.getLongitude(), a.second.getLatitude());
+        if (distance < minDistance) {
+            minDistance = distance;
+            nearest = a.second.getCode();
+        }
+    }
+    return nearest;
+}
+
+

@@ -172,6 +172,14 @@ public:
     int getGlobalNumCountries();
 
     int getGlobalNumFlights();
+
+    /**
+     * Returns the code of the airport nearest to the given coordinates, according to the Haversine function
+     * @param lat Latitude of location
+     * @param lon Longitude of location
+     * @return Code of the airport nearest to the given coordinates
+     */
+    string nearestAirport(float lat, float lon);
 };
 
 
