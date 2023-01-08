@@ -108,12 +108,6 @@ public:
      */
     vector<string> bestRoute5(string ori, string dest);
 
-    vector<string> bestRoute7(string origin_coords, string dest);
-
-    vector<string> bestRoute8(string origin_coords, string city);
-
-    vector<string> bestRoute9(string origin, string loc);
-
     /**
      * Calculates, through BFS, the shortest path between a city and a location
      * @param ori City of origin

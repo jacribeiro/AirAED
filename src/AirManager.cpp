@@ -227,6 +227,22 @@ vector<string> AirManager::bestRoute4(string ori, string dest) {
     }
 }
 
+vector<string> AirManager::bestRoute6(string ori, string dest) {
+    vector<string> route, help;
+    size_t bestSize = INT16_MAX;
+    pair<float, float> aux = sToCoord(dest);
+    string end = nearestAirport(aux.first, aux.second);
+    auto it = cities.at(ori).begin();
+    while (it != cities.at(ori).end()) {
+        help = bestRoute((*it), dest);
+        if (help.size() < bestSize) {
+            route = help;
+            bestSize = route.size();
+        }
+        it++;
+    }
+}
+
 vector<string> AirManager::bestRoute7(string origin_coords, string dest) {
     pair<float, float> coords = sToCoord(origin_coords);
 
