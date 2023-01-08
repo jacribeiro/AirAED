@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <limits>
 #include <set>
 #include "AirManager.h"
 
@@ -15,6 +16,17 @@ AirManager::AirManager(FileReader r) {
     setAirlines(r.readAirlinesFile("CSV/airlines.csv"));
     readAirportFile("CSV/airports.csv");
     readFlightsFile("CSV/flights.csv");
+}
+
+pair<float, float> sToCoord(string coord) {
+    size_t comma = coord.find(',');
+    string lat = coord.substr(0, comma);
+    string lon = coord.substr(comma + 1, coord.size() - lat.size() - 1);
+    return {stof(lat), stof(lon)};
+}
+
+float haversine(float p1long, float p1lat, float p2long, float p2lat){
+    return 2.0 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
 }
 
 unordered_map<string, Airport> AirManager::getAirports() {
@@ -198,6 +210,24 @@ vector<string> AirManager::bestRoute3(string ori, string loc) {
 
 }
 
+vector<string> AirManager::bestRoute7(string origin_coords, string dest) {
+    pair<float, float> coords = sToCoord(origin_coords);
+
+    string ap = nearestAirport(coords.first, coords.second);
+
+    vector<string> route = bestRoute(ap, dest);
+}
+
+vector<string> AirManager::bestRoute8(string origin_coords, string city) {
+    pair<float, float> coords = sToCoord(origin_coords);
+
+    string ap = nearestAirport(coords.first, coords.second);
+
+    vector<string> route = bestRoute2(ap, city);
+}
+
+
+
 vector<string> AirManager::getAirportsInCity(string city) {
     return cities.at(city);
 }
@@ -356,9 +386,7 @@ int AirManager::getGlobalNumFlights() {
     return cont;
 }
 
-float haversine(float p1long, float p1lat, float p2long, float p2lat){
-    return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
-}
+
 
 string AirManager::nearestAirport(float lat, float lon) {
     string nearest;
@@ -373,11 +401,6 @@ string AirManager::nearestAirport(float lat, float lon) {
     return nearest;
 }
 
-pair<float, float> sToCoord(string coord) {
-    size_t comma = coord.find(',');
-    string lat = coord.substr(0, comma);
-    string lon = coord.substr(comma + 1, coord.size() - lat.size() - 1);
-    return {stof(lat), stof(lon)};
-}
+
 
 
