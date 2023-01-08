@@ -112,6 +112,8 @@ public:
 
     vector<string> bestRoute8(string origin_coords, string city);
 
+    vector<string> bestRoute9(string origin, string loc);
+
     /**
      * Returns vector of airport codes of airports located in the given city
      * @param city City whose airports we want to get

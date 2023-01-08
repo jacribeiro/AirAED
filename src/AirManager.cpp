@@ -216,6 +216,8 @@ vector<string> AirManager::bestRoute7(string origin_coords, string dest) {
     string ap = nearestAirport(coords.first, coords.second);
 
     vector<string> route = bestRoute(ap, dest);
+
+    return route;
 }
 
 vector<string> AirManager::bestRoute8(string origin_coords, string city) {
@@ -224,9 +226,20 @@ vector<string> AirManager::bestRoute8(string origin_coords, string city) {
     string ap = nearestAirport(coords.first, coords.second);
 
     vector<string> route = bestRoute2(ap, city);
+
+    return route;
 }
 
+vector<string> AirManager::bestRoute9(string origin, string loc) {
+    pair<float, float> coords_partida = sToCoord(origin);
+    pair<float, float> coords_destino = sToCoord(loc);
 
+    string ap_p = nearestAirport(coords_partida.first, coords_partida.second);
+    string ap_d = nearestAirport(coords_destino.first, coords_destino.second);
+
+    vector<string> route = bestRoute(ap_p, ap_d);
+    return route;
+}
 
 vector<string> AirManager::getAirportsInCity(string city) {
     return cities.at(city);
