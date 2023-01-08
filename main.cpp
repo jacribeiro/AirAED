@@ -5,5 +5,4 @@ int main() {
     AirManager manager = AirManager(FileReader());
     Menu m = Menu(manager);
     m.show();
-
 }

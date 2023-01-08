@@ -27,25 +27,25 @@ public:
     Airline(string c, string n, string nn, string cy);
 
     /**
-     * Returns the ICAO code for the airline
+     * Returns the ICAO code for the airline (Complexity: O(1))
      * @return the ICAO code for the airline
      */
     string getCode() const;
 
     /**
-     * Returns the offcial name of the airline
+     * Returns the offcial name of the airline (Complexity: O(1))
      * @return the official name of the airline
      */
     string getName() const;
 
     /**
-     * Returns the nickname of the airline
+     * Returns the nickname of the airline (Complexity: O(1))
      * @return the nickname of the airline
      */
     string getNickname() const;
 
     /**
-     * Returns the airline's country of origin
+     * Returns the airline's country of origin (Complexity: O(1))
      * @return the airline's country of origin
      */
     string getCountry() const;

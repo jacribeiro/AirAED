@@ -15,7 +15,7 @@ using namespace std;
 class FileReader {
 public:
     /**
-     * Creates a map of the Airports in the system, indexed by their IATA code
+     * Creates a map of the Airports in the system, indexed by their IATA code (Complexity: O(n))
      * @param fname The name of the file to be read
      * @return Map of the Airports in the system
      */

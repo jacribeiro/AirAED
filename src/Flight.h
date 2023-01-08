@@ -24,13 +24,13 @@ public:
     Flight(string airport, string airline);
 
     /**
-     * Returns ICAO code for the destination airport
+     * Returns ICAO code for the destination airport(Complexity: O(1))
      * @return the ICAO code for the destination airport
      */
     string getDestination() const;
 
     /**
-     * Returns the airline responsible for the flight
+     * Returns the airline responsible for the flight(Complexity: O(1))
      * @return the airline responsible for the flight
      */
     string getAirline() const;
