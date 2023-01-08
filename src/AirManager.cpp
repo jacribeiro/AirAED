@@ -17,6 +17,17 @@ AirManager::AirManager(FileReader r) {
     readFlightsFile("CSV/flights.csv");
 }
 
+pair<float, float> sToCoord(string coord) {
+    size_t comma = coord.find(',');
+    string lat = coord.substr(0, comma);
+    string lon = coord.substr(comma + 1, coord.size() - lat.size() - 1);
+    return {stof(lat), stof(lon)};
+}
+
+float haversine(float p1long, float p1lat, float p2long, float p2lat){
+    return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
+}
+
 unordered_map<string, Airport> AirManager::getAirports() {
     return airports;
 }
@@ -169,12 +180,12 @@ vector<string> AirManager::bestRouteDistribution(string ori, string dest, pair<i
     }
 }
 
-vector<string> AirManager::bestRoute(string origin, string destination) {
+vector<string> AirManager::bestRoute(string ori, string dest) {
     vector<string> route;
-    bfs_path(origin, destination);
-    while (destination != "") {
-        route.insert(route.begin(), destination);
-        destination = airports.at(destination).getPrevious();
+    bfs_path(ori, dest);
+    while (dest != "") {
+        route.insert(route.begin(), dest);
+        dest = airports.at(dest).getPrevious();
     }
     return route;
 }
@@ -195,7 +206,23 @@ vector<string> AirManager::bestRoute2(string ori, string city) {
 }
 
 vector<string> AirManager::bestRoute3(string ori, string loc) {
+    pair<float, float> coord = sToCoord(loc);
+    string dest = nearestAirport(coord.first, coord.second);
+    return bestRoute(ori, dest);
+}
 
+vector<string> AirManager::bestRoute4(string ori, string dest) {
+    vector<string> route, aux;
+    size_t bestSize = INT16_MAX;
+    auto it = cities.at(ori).begin();
+    while (it != cities.at(ori).end()) {
+        aux = bestRoute((*it), dest);
+        if (aux.size() < bestSize) {
+            route = aux;
+            bestSize = route.size();
+        }
+        it++;
+    }
 }
 
 vector<string> AirManager::getAirportsInCity(string city) {
@@ -356,10 +383,6 @@ int AirManager::getGlobalNumFlights() {
     return cont;
 }
 
-float haversine(float p1long, float p1lat, float p2long, float p2lat){
-    return 2 * 6371 * asin(sqrt(pow(sin((p2lat - p1lat)/2),2) + cos(p2lat) * cos(p1lat) + pow(sin((p2long - p1long)/2),2)));
-}
-
 string AirManager::nearestAirport(float lat, float lon) {
     string nearest;
     float minDistance = MAXFLOAT;
@@ -372,12 +395,3 @@ string AirManager::nearestAirport(float lat, float lon) {
     }
     return nearest;
 }
-
-pair<float, float> sToCoord(string coord) {
-    size_t comma = coord.find(',');
-    string lat = coord.substr(0, comma);
-    string lon = coord.substr(comma + 1, coord.size() - lat.size() - 1);
-    return {stof(lat), stof(lon)};
-}
-
-

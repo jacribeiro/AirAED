@@ -70,11 +70,11 @@ public:
 
     /**
      * Calculates, through BFS, the shortest path between two given airports
-     * @param origin Code of the origin airport
-     * @param destination Code of the destination airport
+     * @param ori Code of the origin airport
+     * @param dest Code of the destination airport
      * @return A vector containing the best route to take, starting from the origin airport, and ending in the destination
      */
-    vector<string> bestRoute(string origin, string destination);
+    vector<string> bestRoute(string ori, string dest);
 
     /**
      * Calculates, through BFS, the shortest path between an airport and a given city
@@ -107,6 +107,38 @@ public:
      * @return A vector containing the best route to take, starting from the origin city, and ending in the destination
      */
     vector<string> bestRoute5(string ori, string dest);
+
+    /**
+     * Calculates, through BFS, the shortest path between a city and a location
+     * @param ori City of origin
+     * @param dest String of coordinates (in the format "lat,lon") for the destination
+     * @return A vector containing the best route to take, starting from the origin city, and ending in the destination
+     */
+    vector<string> bestRoute6(string ori, string dest);
+
+    /**
+     * Calculates, through BFS, the shortest path between a location and a given airport
+     * @param ori String of coordinates (in the format "lat,lon") for the origin
+     * @param dest Code of the destination airport
+     * @return A vector containing the best route to take, starting from the origin location, and ending in the destination
+     */
+    vector<string> bestRoute7(string ori, string dest);
+
+    /**
+     * Calculates, through BFS, the shortest path between a location and a given airport
+     * @param ori String of coordinates (in the format "lat,lon") for the origin
+     * @param dest City of destination
+     * @return A vector containing the best route to take, starting from the origin location, and ending in the destination
+     */
+    vector<string> bestRoute8(string ori, string dest);
+
+    /**
+     * Calculates, through BFS, the shortest path between two locations
+     * @param ori String of coordinates (in the format "lat,lon") for the origin
+     * @param dest String of coordinates (in the format "lat,lon") for the destination
+     * @return A vector containing the best route to take, starting from the origin location, and ending in the destination
+     */
+    vector<string> bestRoute9(string ori, string dest);
 
     /**
      * Returns vector of airport codes of airports located in the given city
