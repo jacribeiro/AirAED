@@ -189,7 +189,87 @@ void Menu::showAirportInformation(AirManager &manager, string airport) {
 
 }
 void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int, int> option) {
-    manager.bestRouteDistribution(ori, dest, option);
+    vector<string> v = manager.bestRouteDistribution(ori, dest, option);
+    cout << "==========================================================================\n";
+    switch(option.first){
+        case 1: {
+            switch (option.second) {
+                case 1: {
+                    cout << "The best way to get from the " << ori << " airport to the " << dest << " airport is:\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+                case 2: {
+                    cout << "The best way to get from the " << ori << " airport to the city of " << dest << " is:\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+                case 3: {
+                    cout << "The best way to get from the " << ori << " airport to [" << dest << "] is:\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+            }
+        }
+
+        case 2: {
+            switch(option.second) {
+                case 1: {
+                    cout << "The best way to get from the city of " << ori << " to the " << dest << " airport is:\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+                case 2: {
+                    cout << "The best way to get from the city of " << ori << " to the city of " << dest << " is;\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+                case 3: {
+                    cout << "The best way to get from the city of " << ori << " to [" << dest << "] is:\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+            }
+        }
+
+        case 3: {
+            switch(option.second) {
+                case 1: {
+                    cout << "The best way to get from [" << ori << "] to the " << dest << " airport is:\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+                case 2: {
+                    cout << "The best way to get from [" << ori << "] to the city of " << dest << " is:\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+                case 3: {
+                    cout << "The best way to get from [" << ori << "] to [" << dest << "] is:\n";
+                    for(auto s : v){
+                        cout << ">" << s << " airport\n";
+                    }
+                    cout << "==========================================================================\n";
+                }
+            }
+        }
+    }
 }
 
 void Menu::showCountryAirlines(AirManager &manager, string country){
