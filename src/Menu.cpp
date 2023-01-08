@@ -188,6 +188,7 @@ void Menu::showAirportInformation(AirManager &manager, string airport) {
     cout<<"===============================================================================\n";
 
 }
+
 void Menu::showBestRoute(AirManager &manager, string ori, string dest, pair<int, int> option) {
     manager.bestRouteDistribution(ori, dest, option);
 }
