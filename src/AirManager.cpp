@@ -324,4 +324,11 @@ string AirManager::nearestAirport(float lat, float lon) {
     return nearest;
 }
 
+pair<float, float> sToCoord(string coord) {
+    size_t comma = coord.find(',');
+    string lat = coord.substr(0, comma);
+    string lon = coord.substr(comma + 1, coord.size() - lat.size() - 1);
+    return {stof(lat), stof(lon)};
+}
+
 
